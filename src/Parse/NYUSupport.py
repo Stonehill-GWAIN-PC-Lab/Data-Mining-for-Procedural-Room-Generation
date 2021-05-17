@@ -4,7 +4,7 @@ import h5py,math
 
 from collections import Counter,defaultdict
 import numpy as np
-import ObjectMetrics
+from .. import ObjectMetrics
 
 #Return back a parsed list of Support frequency connections from the nyu_depth_v2_labeled matlab matrix.
 #That matrix was converted from the originial found at https://cs.nyu.edu/~silberman/datasets/
