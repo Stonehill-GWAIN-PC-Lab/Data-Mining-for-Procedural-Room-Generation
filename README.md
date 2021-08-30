@@ -23,7 +23,7 @@ Q. Fu, X. Chen, X. Wang, S. Wen, B. Zhou, and F. Hongbo, “Adaptive synthesis o
 
 
 For those metrics, I have not fully written out those methods on this repository.
-##Citations
+## Citations
 If you find this work useful, then you should cite the following papers:
 
 Z. S. Kermani, Z. Liao, P. Tan, and H. Zhang, “Learning 3D Scene Synthesis from Annotated RGB‐D Images,” Computer Graphics Forum, vol. 35, no. 5, pp. 197–206, 2016, doi: 10.1111/cgf.12976.
