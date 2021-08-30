@@ -34,7 +34,7 @@ M. Fisher, D. Ritchie, M. Savva, T. Funkhouser, and P. Hanrahan, “Example-base
 
 Q. Fu, X. Chen, X. Wang, S. Wen, B. Zhou, and F. Hongbo, “Adaptive synthesis of indoor scenes via activity-associated object relation graphs,” ACM Transactions on Graphics, vol. 36, no. 6, p. 13, 2017.
 
-####Dataset citations
+#### Dataset citations
 S. Song, S. P. Lichtenberg, and J. Xiao, “Sun rgb-d: A rgb-d scene understanding benchmark suite,” in the IEEE conference on computer vision and pattern recognition, 2015, pp. 567–576.
 
 N. Silberman, D. Hoiem, P. Kohli, and R. Fergus, “Indoor segmentation and support inference from rgbd images,” Computer Vision–ECCV 2012, pp. 746–760, 2012.
