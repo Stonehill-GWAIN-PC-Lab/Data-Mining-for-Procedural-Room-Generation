@@ -55,9 +55,7 @@ def sunRGBDDataMiningFisher():
        write_type tells us if we are overwriting the file or appending.
     '''
     import src.Parse.SUNRGBD as SUNRGBD
-    import src.Parse.NYUSupport as NYUSupport
 
-    NYUSupport.mineNYU2Data(path_to_data,"support_mining.csv")
     frames = defaultdict(list)
     a = path_to_data+"SUNRGBD/"
     direct = ["kv2/align_kv2/","kv2/kinect2data/","kv1/b3dodata/","kv1/NYUdata/",
