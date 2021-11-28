@@ -18,6 +18,7 @@ from functools import partial,reduce
 import os
 NUM_THREADS = 8
 
+#Assumes current dir = /project/ct-shml/SUNRGBD/Data-Mining-for-Procedural-Room-Generation
 path_to_data = "../../../../projectnb/ct-shml/"
 
 def getObjects(frames):
@@ -42,6 +43,8 @@ def occurenceModel(scene):
 #arrangement model
     # A(o, S ) is a function which takes an object o positioned within a scene S and returns an unnormalized probability of its current placement and orientation.
     # (describes where those objects can be placed)
+def arrangementModel(oject, scene):
+    print('TODO')
 
 def sunRGBDDataMiningFisher():
     '''max_amount controls the maximum number of rooms we look out, which helps us bound the problem
@@ -56,7 +59,7 @@ def sunRGBDDataMiningFisher():
 
     NYUSupport.mineNYU2Data(path_to_data,"support_mining.csv")
     frames = defaultdict(list)
-    a = path_to_data+"sunrgbd/"
+    a = path_to_data+"SUNRGBD/"
     direct = ["kv2/align_kv2/","kv2/kinect2data/","kv1/b3dodata/","kv1/NYUdata/",
               "realsense/lg/","realsense/sa/","realsense/sh/","realsense/shr/",
               "xtion/xtion_align_data"] #"xtion/sun3ddata", has weird paths
