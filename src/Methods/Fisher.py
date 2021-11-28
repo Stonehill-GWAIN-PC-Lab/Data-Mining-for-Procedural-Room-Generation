@@ -64,8 +64,14 @@ def sunRGBDDataMiningFisher():
 
     direct = [a+d for d in direct] #Append the relative
     for d in direct:
+        print("d:")
+        print(d)
         paths = [f for f in os.listdir(d) if not os.path.isfile(os.path.join(d,f))]
+        print("paths:")
+        print(paths)
         frames = SUNRGBD.getFrames(d,paths,frames)
+        print("Frames:")
+        print(frames)
     #This combines our similar rooms from the pattern analysis
     print ("Total Objects",len(getObjects(frames)))
 
