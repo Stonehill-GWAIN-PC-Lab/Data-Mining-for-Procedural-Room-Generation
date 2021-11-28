@@ -144,7 +144,12 @@ def readFrame( framePath, bfx ):
 ################################################################################
 ##Reads the data file given the directory and list of scene names
 def getFrames(directory,folder_names,frames = defaultdict(list)):
+    print("getFrames()")
     for f in folder_names:
+        print('f:')
+        print(f)
+        print("readFrame path:")
+        print(path.join(directory,f))
         data = readFrame(path.join(directory,f),True)
         if data is not None:
             frames[data.sceneName].append(data)
