@@ -69,16 +69,16 @@ def sunRGBDDataMiningFisher(starting_location = None,data_cleanup = None, write_
 
     direct = [a+d for d in direct] #Append the relative
     for d in direct:
-        print("d:")
-        print(d)
+        #print("d:")
+        #print(d)
         paths = [f for f in os.listdir(d) if not os.path.isfile(os.path.join(d,f))]
-        print("paths:")
-        print(paths)
+        #print("paths:")
+        #print(paths)
         frames = SUNRGBD.getFrames(d,paths,frames)
-        print("Frames:")
-        print(frames)
+        #print("Frames:")
+        #print(frames)
     #This combines our similar rooms from the pattern analysis
-    print ("Total Objects",len(getObjects(frames)))
+    #print ("Total Objects",len(getObjects(frames)))
     if data_cleanup is not None:
         keys = data_cleanup.cleanupRooms(frames)
         data_cleanup.cleanupObjects(frames)
@@ -97,6 +97,7 @@ def sunRGBDDataMiningFisher(starting_location = None,data_cleanup = None, write_
             #del data #Clean up our messes
     print("Finished running file")
     print("Omitted mining.csv")
+    print(total_frames)
 
 if __name__ == "__main__":
     import os
