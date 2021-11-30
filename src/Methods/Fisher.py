@@ -87,15 +87,16 @@ def sunRGBDDataMiningFisher(starting_location = None,data_cleanup = None, write_
     from functools import reduce
     total_frames = reduce(lambda x,y: x+y,[len(frames[frame]) for frame in keys])
     print ("Finished sorting the file paths:",total_frames)
-    with open('mining.csv',write_type) as fi:
+    #with open('mining.csv',write_type) as fi:
         #TODO: Make every connection discovered by subgraph pattern mining
-        for frame in keys:
-            data = frames[frame]
-            fi.write(frame+','+str(len(data))+'\n')
-            print (frame+":"+str(len(data)))
-            FisherRelationships(frame,data,fi,[],True)
-            del data #Clean up our mess
+        #for frame in keys:
+            #data = frames[frame]
+            #fi.write(frame+','+str(len(data))+'\n')
+            #print (frame+":"+str(len(data)))
+            #FisherRelationships(frame,data,fi,[],True)
+            #del data #Clean up our messes
     print("Finished running file")
+    print("Omitted mining.csv")
 
 if __name__ == "__main__":
     import os
