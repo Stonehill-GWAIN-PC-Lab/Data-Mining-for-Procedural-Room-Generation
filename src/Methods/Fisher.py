@@ -28,25 +28,30 @@ def getObjects(frames):
             object_labels.extend([obj.label for obj in scene.annotation3D])
     return set(object_labels)
 
-# probabilistic model for scenes
+def FisherRelationships(frame,data,fi,prox_list,debug = False):
+    '''Mines our different relationships by grouping objects using the similarity of their neighborhoods(Fisher et al. Section 4)'''
+    #TODO: Use Fisher approach rather than Kermani
 
-# occurnence model
-    # O(S) takes a scene S as input and returns a probability for the static sup- port hierarchy of the objects in the scene
-    # (describes what objects can be in synthesized scenes)
-def occurenceModel(scene):
+def runOccurenceModel():
+    #read mining.csv, create train and test dataset
+    #create occurence model and train on train data
+    #test against test data
+    print('TODO')
+
+def occurenceModel(scenes):
+    '''Function takes an input scene and returns a probability for the static support hierarchy of the objects in the scene.
+    The Occurence Model (Fisher et al. Section 6) describes what objects can be in synthesized scenes'''
     # use a Bayesian network B(S) to model the distribution over the set of objects that occur in a scene. 
     print('TODO')
-
     # given a fixed set of objects we use a simple parent probability table to define a function T (S) that gives the probability of the parent-child connections between objects in a scene.
-
+    print('TODO')
     
-#arrangement model
-    # A(o, S ) is a function which takes an object o positioned within a scene S and returns an unnormalized probability of its current placement and orientation.
-    # (describes where those objects can be placed)
 def arrangementModel(oject, scene):
+    '''Function takes an object o positioned within a scene S and returns an unnormalized probability of its current placement and orientation.
+    The Arrangement Model (Fisher et al. Section 7) describes where scene objects can be placed.'''
     print('TODO')
 
-def sunRGBDDataMiningFisher():
+def sunRGBDDataMiningFisher(starting_location = None,data_cleanup = None, write_type = 'w'):
     '''max_amount controls the maximum number of rooms we look out, which helps us bound the problem
        starting_location tells us that there are rooms in the beginning that we can skip, most likely because we've already looked at them
        location_amount tells us to only look at a certain number of rooms, again so that we can run this in stages
@@ -74,6 +79,23 @@ def sunRGBDDataMiningFisher():
         print(frames)
     #This combines our similar rooms from the pattern analysis
     print ("Total Objects",len(getObjects(frames)))
+    if data_cleanup is not None:
+        keys = data_cleanup.cleanupRooms(frames)
+        data_cleanup.cleanupObjects(frames)
+    else:
+        keys = [k for k in frames]
+    from functools import reduce
+    total_frames = reduce(lambda x,y: x+y,[len(frames[frame]) for frame in keys])
+    print ("Finished sorting the file paths:",total_frames)
+    with open('mining.csv',write_type) as fi:
+        #TODO: Make every connection discovered by subgraph pattern mining
+        for frame in keys:
+            data = frames[frame]
+            fi.write(frame+','+str(len(data))+'\n')
+            print (frame+":"+str(len(data)))
+            FisherRelationships(frame,data,fi,[],True)
+            del data #Clean up our mess
+    print("Finished running file")
 
 if __name__ == "__main__":
     import os
@@ -82,3 +104,4 @@ if __name__ == "__main__":
     removed_rooms = ["Dining_Room_Garage_Gym","Dining_Room_Kitchen_Office_Garage","Room","Living_Room_Dining_Room_Kitchen_Garage"]
     support = (20,1000)
     sunRGBDDataMiningFisher()
+    #runOccurenceModel()
