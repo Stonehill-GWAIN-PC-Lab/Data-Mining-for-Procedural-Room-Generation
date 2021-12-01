@@ -141,7 +141,6 @@ def writeTestFile(graphs):
             edges = graphs[i][1]
             for vert in verts:
                 fi.write("v "+str(vert[0])+" "+str(label_dict[vert[1]])+"\n")
-                fi.write(vert[1]+"\n")
             for e in range(len(edges)):
                 edge = edges[e]
                 fi.write("e "+str(edge[0])+" "+str(edge[1])+" "+str(1)+"\n")
@@ -161,7 +160,9 @@ def return_data_frame(label_dict):
     r_label_dict = {}
     for key in label_dict:
         r_label_dict[label_dict[key]] = key
+    print(r_label_dict)
     paths = [f for f in os.listdir(".") if os.path.isfile(f) and "out.txt" in f]
+    print(paths)
     report_df = {}
     keys = ["support","verts","edges","index"]#,"num_vert"
     for key in keys:
@@ -172,7 +173,9 @@ def return_data_frame(label_dict):
             edge = []
             with open(path,'r') as fi:
                 lines = fi.readlines()
+                print('printing lines)')
                 for line in lines:
+                    print(line)
                     if len(line) == 1:
                         report_df["verts"].append(np.array(vert))
                         #report_df["num_vert"].append(len(vert))
