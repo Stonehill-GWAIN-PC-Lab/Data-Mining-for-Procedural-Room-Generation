@@ -62,7 +62,12 @@ def twoObjectRelationshipProbability(object1_pos, object2_pos):
     print(distance)
     z_score = (distance-mean)/std
     print(z_score)
-    return round(st.norm.cdf(z_score), 3)
+    probability = round(st.norm.cdf(z_score), 5)
+    if(probability>.5):
+        return .5/probability
+    else:
+        return .5/( (.5-probability)*2 + probability)
+    return 1
 
 def sunRGBDDataMiningFisher(starting_location = None,data_cleanup = None, write_type = 'w'):
     '''max_amount controls the maximum number of rooms we look out, which helps us bound the problem
