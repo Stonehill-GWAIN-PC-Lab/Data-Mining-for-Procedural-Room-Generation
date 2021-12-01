@@ -81,18 +81,15 @@ def sunRGBDDataMiningFisher(starting_location = None,data_cleanup = None, write_
     from functools import reduce
     total_frames = reduce(lambda x,y: x+y,[len(frames[frame]) for frame in keys])
     print ("Finished sorting the file paths:",total_frames)
-    with open(r'/project/ct-shml/SUNRGBD/outputs/mining.csv',write_type) as fi:
+    with open(r'/project/ct-shml/Jimmy-SUNRGBD/outputs/mining.csv',write_type) as fi:
         #TODO: Make every connection discovered by subgraph pattern mining
         for frame in keys:
             data = frames[frame]
             fi.write(frame+','+str(len(data))+'\n')
-            #FisherRelationships(frame,data,fi,[],True)
-            KermaniRelationships(frame,data,fi,[],True)            
+            FisherRelationships(frame,data,fi,[],True)
+            #KermaniRelationships(frame,data,fi,[],True)            
             del data #Clean up our messes
     print("Finished running file")
-    print("-----------------------")
-    print("Printing total frames")
-    print(total_frames)
 
 if __name__ == "__main__":
     import os
