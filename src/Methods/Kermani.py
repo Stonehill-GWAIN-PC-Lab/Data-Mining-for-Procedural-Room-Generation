@@ -141,6 +141,7 @@ def writeTestFile(graphs):
             edges = graphs[i][1]
             for vert in verts:
                 fi.write("v "+str(vert[0])+" "+str(label_dict[vert[1]])+"\n")
+                fi.write(vert[1]+"\n")
             for e in range(len(edges)):
                 edge = edges[e]
                 fi.write("e "+str(edge[0])+" "+str(edge[1])+" "+str(1)+"\n")
