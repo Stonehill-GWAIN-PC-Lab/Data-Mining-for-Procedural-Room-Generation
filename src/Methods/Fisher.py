@@ -57,7 +57,8 @@ def twoObjectRelationshipProbability(object1_pos, object2_pos):
     #basically finding the zscore of the relationship
     std=15.0
     mean=90.0
-    distance = abs(object1_pos - object2_pos)
+    #distance = abs(object1_pos - object2_pos)
+    distance = ObjectMetrics.proximityCenter()
     print(distance)
     z_score = (distance-mean)/std
     print(z_score)
