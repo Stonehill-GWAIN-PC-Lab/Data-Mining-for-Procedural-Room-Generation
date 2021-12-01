@@ -1,7 +1,7 @@
 # Learning implementation of methods described in:
 # M. Fisher, D. Ritchie, M. Savva, T. Funkhouser, and P. Hanrahan, “Example-based synthesis of 3D object arrangements,” ACM Transactions on Graphics (TOG), vol. 31, no. 6, p. 135, 2012.
 
-from src.Methods.Kermani import KermaniRelationships
+from src.Methods.Kermani import determineProximity
 from .. import ObjectMetrics
 import numpy as np
 import pandas as pd
@@ -32,7 +32,7 @@ def getObjects(frames):
 
 def FisherRelationships(frame,data,fi,prox_list,debug = False):
     '''Mines our different relationships by grouping objects using the similarity of their neighborhoods(Fisher et al. Section 4)'''
-    
+    print(determineProximity(data))
 
 def runOccurenceModel():
     #read mining.csv, create train and test dataset
@@ -102,12 +102,10 @@ def sunRGBDDataMiningFisher(starting_location = None,data_cleanup = None, write_
         for frame in keys:
             data = frames[frame]
             fi.write(frame+','+str(len(data))+'\n')
-            if(frame=="kitchen"):
+            if(frame=="kitchen"): #We are only learning on kitchens
                 print('kitchen example')
                 FisherRelationships(frame,data,fi,[],True)
                 del data #Clean up our messes
-            else:
-                print('not kitchen')
     print("Finished running file")
 
 if __name__ == "__main__":
