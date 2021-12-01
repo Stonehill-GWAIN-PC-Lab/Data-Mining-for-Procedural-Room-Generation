@@ -90,6 +90,7 @@ def sunRGBDDataMiningFisher(starting_location = None,data_cleanup = None, write_
             KermaniRelationships(frame,data,fi,[],True)            
             del data #Clean up our messes
     print("Finished running file")
+    print("Testing R Pulls")
     print(total_frames)
 
 if __name__ == "__main__":
