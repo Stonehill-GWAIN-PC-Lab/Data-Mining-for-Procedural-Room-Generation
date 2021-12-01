@@ -6,6 +6,7 @@ from .. import ObjectMetrics
 import numpy as np
 import pandas as pd
 import math
+import scipy.stats as st
 
 import time
 from collections import Counter,defaultdict
@@ -47,10 +48,20 @@ def occurenceModel(scenes):
     # given a fixed set of objects we use a simple parent probability table to define a function T (S) that gives the probability of the parent-child connections between objects in a scene.
     print('TODO')
     
-def arrangementModel(oject, scene):
+def arrangementModel(object, scene):
     '''Function takes an object o positioned within a scene S and returns an unnormalized probability of its current placement and orientation.
     The Arrangement Model (Fisher et al. Section 7) describes where scene objects can be placed.'''
     print('TODO')
+    
+def twoObjectRelationshipProbability(object1_pos, object2_pos):
+    #basically finding the zscore of the relationship
+    std=15.0
+    mean=90.0
+    distance = abs(object1_pos - object2_pos)
+    print(distance)
+    z_score = (distance-mean)/std
+    print(z_score)
+    return round(st.norm.cdf(z_score), 3)
 
 def sunRGBDDataMiningFisher(starting_location = None,data_cleanup = None, write_type = 'w'):
     '''max_amount controls the maximum number of rooms we look out, which helps us bound the problem
@@ -97,5 +108,6 @@ if __name__ == "__main__":
     same_objects = {"fridge":"refridgerator","bathroomvanity":"bathroom_vanity","toyhouse":"toy_house","bookshelf":"book_shelf","tissuebox":"tissue_box"}
     removed_rooms = ["Dining_Room_Garage_Gym","Dining_Room_Kitchen_Office_Garage","Room","Living_Room_Dining_Room_Kitchen_Garage"]
     support = (20,1000)
-    sunRGBDDataMiningFisher()
+    #sunRGBDDataMiningFisher()
+    print(twoObjectRelationshipProbability(190, 100))
     #runOccurenceModel()
