@@ -30,7 +30,7 @@ def getObjects(frames):
 
 def FisherRelationships(frame,data,fi,prox_list,debug = False):
     '''Mines our different relationships by grouping objects using the similarity of their neighborhoods(Fisher et al. Section 4)'''
-    #TODO: Use Fisher approach rather than Kermani
+    
 
 def runOccurenceModel():
     #read mining.csv, create train and test dataset
@@ -60,7 +60,6 @@ def sunRGBDDataMiningFisher(starting_location = None,data_cleanup = None, write_
        write_type tells us if we are overwriting the file or appending.
     '''
     import src.Parse.SUNRGBD as SUNRGBD
-
     frames = defaultdict(list)
     a = path_to_data+"SUNRGBD/"
     direct = ["kv2/align_kv2/","kv2/kinect2data/","kv1/b3dodata/","kv1/NYUdata/",
@@ -69,16 +68,10 @@ def sunRGBDDataMiningFisher(starting_location = None,data_cleanup = None, write_
 
     direct = [a+d for d in direct] #Append the relative
     for d in direct:
-        #print("d:")
-        #print(d)
         paths = [f for f in os.listdir(d) if not os.path.isfile(os.path.join(d,f))]
-        #print("paths:")
-        #print(paths)
         frames = SUNRGBD.getFrames(d,paths,frames)
-        #print("Frames:")
-        #print(frames)
     #This combines our similar rooms from the pattern analysis
-    #print ("Total Objects",len(getObjects(frames)))
+    print ("Total Objects",len(getObjects(frames)))
     if data_cleanup is not None:
         keys = data_cleanup.cleanupRooms(frames)
         data_cleanup.cleanupObjects(frames)
@@ -87,14 +80,14 @@ def sunRGBDDataMiningFisher(starting_location = None,data_cleanup = None, write_
     from functools import reduce
     total_frames = reduce(lambda x,y: x+y,[len(frames[frame]) for frame in keys])
     print ("Finished sorting the file paths:",total_frames)
-    #with open('mining.csv',write_type) as fi:
+    with open('../../project/ct-shml/SUNRGBD/mining.csv',write_type) as fi:
         #TODO: Make every connection discovered by subgraph pattern mining
-        #for frame in keys:
-            #data = frames[frame]
-            #fi.write(frame+','+str(len(data))+'\n')
+        for frame in keys:
+            data = frames[frame]
+            fi.write(frame+','+str(len(data))+'\n')
             #print (frame+":"+str(len(data)))
-            #FisherRelationships(frame,data,fi,[],True)
-            #del data #Clean up our messes
+            FisherRelationships(frame,data,fi,[],True)
+            del data #Clean up our messes
     print("Finished running file")
     print("Omitted mining.csv")
     print(total_frames)
