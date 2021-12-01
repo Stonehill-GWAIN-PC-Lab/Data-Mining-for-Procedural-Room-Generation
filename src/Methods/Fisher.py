@@ -102,9 +102,12 @@ def sunRGBDDataMiningFisher(starting_location = None,data_cleanup = None, write_
         for frame in keys:
             data = frames[frame]
             fi.write(frame+','+str(len(data))+'\n')
-            FisherRelationships(frame,data,fi,[],True)
-            #KermaniRelationships(frame,data,fi,[],True)            
-            del data #Clean up our messes
+            if(frame=="kitchen"):
+                print('kitchen example')
+                FisherRelationships(frame,data,fi,[],True)
+                del data #Clean up our messes
+            else:
+                print('not kitchen')
     print("Finished running file")
 
 if __name__ == "__main__":
@@ -113,6 +116,6 @@ if __name__ == "__main__":
     same_objects = {"fridge":"refridgerator","bathroomvanity":"bathroom_vanity","toyhouse":"toy_house","bookshelf":"book_shelf","tissuebox":"tissue_box"}
     removed_rooms = ["Dining_Room_Garage_Gym","Dining_Room_Kitchen_Office_Garage","Room","Living_Room_Dining_Room_Kitchen_Garage"]
     support = (20,1000)
-    #sunRGBDDataMiningFisher()
-    print(twoObjectRelationshipProbability(190, 100))
+    sunRGBDDataMiningFisher()
+    #print(twoObjectRelationshipProbability(190, 100))
     #runOccurenceModel()
