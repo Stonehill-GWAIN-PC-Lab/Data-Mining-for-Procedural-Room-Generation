@@ -1,7 +1,7 @@
 # Learning implementation of methods described in:
 # M. Fisher, D. Ritchie, M. Savva, T. Funkhouser, and P. Hanrahan, “Example-based synthesis of 3D object arrangements,” ACM Transactions on Graphics (TOG), vol. 31, no. 6, p. 135, 2012.
 
-from src.Methods.Kermani import minSpanningGraph
+from src.Methods.Kermani import subgraphs2Factors, subprocessGraphRelations, minSpanningGraph
 from .. import ObjectMetrics
 import numpy as np
 import pandas as pd
@@ -32,18 +32,8 @@ def getObjects(frames):
 
 def FisherRelationships(frame,data,fi,prox_list,debug = False):
     '''Mines our different relationships by grouping objects using the similarity of their neighborhoods(Fisher et al. Section 4)'''
-    print(determineProximity2(data))
-
-def determineProximity2(scene):
-    #ObjectMetrics.proximityCenter,minSpanningGraph
-    graph = minSpanningGraph(scene,ObjectMetrics.proximityCenter)
-    (objs,rels) = ([(i,graph.vertices[i].label) for i in range(len(graph.vertices))],[(e[0],e[1],1) for e in graph.edges])
-    output = {}
-    for rel in rels:
-        source = [i[1] for i in objs if i[0] == rel[0]][0]
-        target = [i[1] for i in objs if i[0] == rel[1]][0]
-        output[source+"$"+target]=True
-    return output
+    prox = subgraphs2Factors(subprocessGraphRelations(data,0.05,ObjectMetrics.proximityCenter,minSpanningGraph))#Should move all percents out so they can be tuned
+    print(prox)
 
 def runOccurenceModel():
     #read mining.csv, create train and test dataset
