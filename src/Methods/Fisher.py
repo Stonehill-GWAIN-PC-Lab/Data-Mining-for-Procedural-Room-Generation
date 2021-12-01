@@ -32,28 +32,7 @@ def getObjects(frames):
 
 def FisherRelationships(frame,data,fi,prox_list,debug = False):
     '''Mines our different relationships by grouping objects using the similarity of their neighborhoods(Fisher et al. Section 4)'''
-    prox = subgraphs2Factors(subprocessGraphRelations2(data,0.05,ObjectMetrics.proximityCenter,minSpanningGraph))#Should move all percents out so they can be tuned
-    print(prox)
-
-def subprocessGraphRelations2(scenes,percent_threshold,graph_func,graph_type):
-    min_gap = math.ceil(len(scenes) * percent_threshold) #If we dont' have our single object at the minimum threshold, we won't have any larger support
-    good_objects = frequencyFind(scenes,min_gap)
-    func = partial(graphRelationHelper,graph_type,graph_func,good_objects)
-    if(len(scenes) > NUM_THREADS * 10): #Makes it worth our while. This number can be played with a bit, if desired
-        p = Pool(NUM_THREADS)
-        parsed_graphs = p.map(func,scenes)
-        p.close()
-        p.join()
-        parsed_graphs = [p for p in parsed_graphs if p is not None]
-    else:
-        parsed_graphs = [p for p in map(func,scenes) if p is not None]
-    label_dict = writeTestFile(parsed_graphs)#Writes out the file to read
-    #print (label_dict)
-    #run_process(percent_threshold)#Processes the file
-    df = return_data_frame(label_dict) #Reads back in the file as a pandas dataframe
-    if df is None or 'verts' not in df.columns.values:
-        return None
-    return df
+    print(data)
 
 def runOccurenceModel():
     #read mining.csv, create train and test dataset
