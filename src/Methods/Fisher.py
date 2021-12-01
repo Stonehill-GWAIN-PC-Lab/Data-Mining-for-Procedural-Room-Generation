@@ -1,6 +1,7 @@
 # Learning implementation of methods described in:
 # M. Fisher, D. Ritchie, M. Savva, T. Funkhouser, and P. Hanrahan, “Example-based synthesis of 3D object arrangements,” ACM Transactions on Graphics (TOG), vol. 31, no. 6, p. 135, 2012.
 
+from src.Methods.Kermani import KermaniRelationships
 from .. import ObjectMetrics
 import numpy as np
 import pandas as pd
@@ -85,11 +86,10 @@ def sunRGBDDataMiningFisher(starting_location = None,data_cleanup = None, write_
         for frame in keys:
             data = frames[frame]
             fi.write(frame+','+str(len(data))+'\n')
-            #print (frame+":"+str(len(data)))
-            FisherRelationships(frame,data,fi,[],True)
+            #FisherRelationships(frame,data,fi,[],True)
+            KermaniRelationships(frame,data,fi,[],True)            
             del data #Clean up our messes
     print("Finished running file")
-    print("Omitted mining.csv")
     print(total_frames)
 
 if __name__ == "__main__":
