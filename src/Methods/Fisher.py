@@ -80,6 +80,7 @@ def sunRGBDDataMiningFisher(starting_location = None,data_cleanup = None, write_
     from functools import reduce
     total_frames = reduce(lambda x,y: x+y,[len(frames[frame]) for frame in keys])
     print ("Finished sorting the file paths:",total_frames)
+    print('cwd: ',os. getcwd())
     with open('/project/ct-shml/SUNRGBD/output/mining.csv',write_type) as fi:
         #TODO: Make every connection discovered by subgraph pattern mining
         for frame in keys:
