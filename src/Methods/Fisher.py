@@ -1,7 +1,7 @@
 # Learning implementation of methods described in:
 # M. Fisher, D. Ritchie, M. Savva, T. Funkhouser, and P. Hanrahan, “Example-based synthesis of 3D object arrangements,” ACM Transactions on Graphics (TOG), vol. 31, no. 6, p. 135, 2012.
 
-from src.Methods.Kermani import subgraphs2Factors, subprocessGraphRelations, minSpanningGraph
+from src.Methods.Kermani import subgraphs2Factors, frequencyFind, graphRelationHelper, writeTestFile, return_data_frame, minSpanningGraph
 from .. import ObjectMetrics
 import numpy as np
 import pandas as pd
@@ -32,8 +32,28 @@ def getObjects(frames):
 
 def FisherRelationships(frame,data,fi,prox_list,debug = False):
     '''Mines our different relationships by grouping objects using the similarity of their neighborhoods(Fisher et al. Section 4)'''
-    prox = subgraphs2Factors(subprocessGraphRelations(data,0.05,ObjectMetrics.proximityCenter,minSpanningGraph))#Should move all percents out so they can be tuned
+    prox = subgraphs2Factors(subprocessGraphRelations2(data,0.05,ObjectMetrics.proximityCenter,minSpanningGraph))#Should move all percents out so they can be tuned
     print(prox)
+
+def subprocessGraphRelations2(scenes,percent_threshold,graph_func,graph_type):
+    min_gap = math.ceil(len(scenes) * percent_threshold) #If we dont' have our single object at the minimum threshold, we won't have any larger support
+    good_objects = frequencyFind(scenes,min_gap)
+    func = partial(graphRelationHelper,graph_type,graph_func,good_objects)
+    if(len(scenes) > NUM_THREADS * 10): #Makes it worth our while. This number can be played with a bit, if desired
+        p = Pool(NUM_THREADS)
+        parsed_graphs = p.map(func,scenes)
+        p.close()
+        p.join()
+        parsed_graphs = [p for p in parsed_graphs if p is not None]
+    else:
+        parsed_graphs = [p for p in map(func,scenes) if p is not None]
+    label_dict = writeTestFile(parsed_graphs)#Writes out the file to read
+    #print (label_dict)
+    #run_process(percent_threshold)#Processes the file
+    df = return_data_frame(label_dict) #Reads back in the file as a pandas dataframe
+    if df is None or 'verts' not in df.columns.values:
+        return None
+    return df
 
 def runOccurenceModel():
     #read mining.csv, create train and test dataset
