@@ -110,7 +110,10 @@ def return_data_frame(label_dict):
                 print('in last if condition')
                 report_df["verts"].append(np.array(vert))
                 #report_df["num_vert"].append(len(vert))
+                print('still in if')
                 report_df["edges"].append(np.array(edge))
+            print('no errors in if')
+            print(report_df)
         df = pd.DataFrame(report_df)
     except:
         print("Exception")
