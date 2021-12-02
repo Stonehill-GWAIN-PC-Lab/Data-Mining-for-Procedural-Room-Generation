@@ -1,7 +1,7 @@
 # Learning implementation of methods described in:
 # M. Fisher, D. Ritchie, M. Savva, T. Funkhouser, and P. Hanrahan, “Example-based synthesis of 3D object arrangements,” ACM Transactions on Graphics (TOG), vol. 31, no. 6, p. 135, 2012.
 
-from src.Methods.Kermani import frequencyFind, graphRelationHelper, writeTestFile, SceneGraph, testInsert
+from src.Methods.Kermani import frequencyFind, graphRelationHelper, writeTestFile, testInsert
 from .. import ObjectMetrics
 import numpy as np
 import pandas as pd
@@ -24,6 +24,21 @@ NUM_THREADS = 8
 path_to_data = "../../../../projectnb/ct-shml/"
 kitchen_dataframe = pd.DataFrame()
 
+class SceneGraph:
+    '''SceneGraph is used to store the vertices and edges that we build the furniture graphs from (for graph mining)'''
+    def __init__(self,vertices = [], edges = []):
+        self.vertices = vertices
+        self.edges  = set(edges)
+
+    def addVertex(self,vertex):
+        self.vertices.add(vertex)
+    def addEdge(self,edge, cost):
+        if edge not in self.edges:
+            self.edges.add(edge, cost)
+        for vert in edge:
+            if self.vertices[vert] not in self.vertices:
+                self.vertices.add(vert)
+
 def getObjects(frames):
     object_labels = []
     for frame in frames:
@@ -44,7 +59,7 @@ def subprocessGraphRelations(scenes,percent_threshold,graph_func,graph_type):
     func = partial(graphRelationHelper,graph_type,graph_func,good_objects)
     if(len(scenes) > NUM_THREADS * 10): #Makes it worth our while. This number can be played with a bit, if desired
         p = Pool(NUM_THREADS)
-        parsed_graphs = p.map(func,scenes)
+        parsed_graphs = p.map(func,scenes) #create minSpanningGraph(objects) and apply twoObjectRelationshipProbabiltiy function to each relationship in the graph
         p.close()
         p.join()
         parsed_graphs = [p for p in parsed_graphs if p is not None]
@@ -135,7 +150,9 @@ def minSpanningGraph(objects,c_func,value_array = None):
         print(edge[0])
         print(edge[1])
         if testInsert(edge[0],T):
-            T.addEdge(edge[0])
+            T.addEdge(edge[0], edge[1]) #Add edge and the edges cost
+    print("printing all edges and their cost in our graph")
+    print(T.edges)
     return T #What we have here is an ijv sparse rep
 
 def return_data_frame(label_dict):
