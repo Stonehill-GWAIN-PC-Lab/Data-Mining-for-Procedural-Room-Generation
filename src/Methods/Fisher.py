@@ -70,6 +70,7 @@ def return_data_frame(label_dict):
     keys = ["support","verts","edges","index"]#,"num_vert"
     for key in keys:
         report_df[key]  = []
+    i='0'
     try: #We wrap this in a try block because it is always possible that gbolt ran out of memory and when it does we need to say that our gspan failed
         vert = []
         edge = []
@@ -94,25 +95,26 @@ def return_data_frame(label_dict):
                         print("t")
                         #This is our support and index
                         report_df["index"].append(data[2])
+                        i=data[2]
                         #report_df["support"].append(data[4])
-                        #debugging - filling in rest of columns with nulls
                         report_df["support"].append("null")
-                        edge.append(["null","null"])
+                        #debug
                         vert.append(["null","null"])
+                        edge.append(["null","null"])
                     elif data[0] == "v":
                         print("v")
                         vert.append([data[1],r_label_dict[data[2]]])
-                        #debugging - filling in rest of columns with nulls
-                        report_df["index"].append("null")
-                        report_df["support"].append("null")
+                        #debug
                         edge.append(["null","null"])
+                        report_df["index"].append(i)
+                        report_df["support"].append("null")
                     elif data[0] == "e":
                         print("e")
                         edge.append([data[1],data[2]])
-                        #debugging - filling in rest of columns with nulls
-                        report_df["index"].append("null")
-                        report_df["support"].append("null")
+                        #debug
                         vert.append(["null","null"])
+                        report_df["index"].append(i)
+                        report_df["support"].append("null")
                     else:
                         pass #We skip the x
             print('finished loop')
@@ -126,7 +128,7 @@ def return_data_frame(label_dict):
             print(len(report_df["verts"]))
             print(len(report_df["edges"]))
             print(len(report_df["index"]))
-        df = pd.DataFrame(report_df["index"])
+        df = pd.DataFrame(report_df)
         print(df)
     except:
         print("Exception")
