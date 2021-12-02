@@ -215,9 +215,12 @@ def arrangementModel(object, scene):
     
 def twoObjectRelationshipProbability(obj1,obj2, value_array = None):
     #basically finding the zscore of the relationship
-    print('printing objs')
+    print('printing obj1')
     print(obj1)
+    print(obj1.centroid)
+    print('printing obj1')
     print(obj2)
+    print(obj2.centroid)
     print()
     std=15.0
     mean=90.0
