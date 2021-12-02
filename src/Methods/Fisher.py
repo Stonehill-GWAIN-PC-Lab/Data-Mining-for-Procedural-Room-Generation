@@ -87,8 +87,20 @@ def createVersusDataFrame(df):
     for x in total_combos:
         list_of_zeros.append(0)
     #making the dataframe with the correct rows and columns
-    relation_dataframe = pd.DataFrame(list(zip(total_combos, list_of_zeros, list_of_zeros)),columns=["relation","percent_avg","total_appearance"])
+    relation_dataframe = pd.DataFrame(list(zip(total_combos, list_of_zeros, list_of_zeros)),columns=["relation","neighborhood_avg","total_appearance"])
     print(relation_dataframe)
+    return relation_dataframe
+
+def findRow(relation_dataframe, object1, object2):
+    mask = []
+    if object1 < object2:
+        mask = relation_dataframe["relation"] == str(str(object1) + " v " + str(object2))
+    else:
+        mask = relation_dataframe["relation"] == str(str(object2) + " v " + str(object1))
+    print(mask)
+    for i in range(0,len(relation_dataframe),1):
+        if mask[i]==True:
+            print(i)
 
 def inList(object_list, value):
     for x in object_list:
