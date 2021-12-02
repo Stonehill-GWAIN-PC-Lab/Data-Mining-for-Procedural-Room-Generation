@@ -33,7 +33,9 @@ class SceneGraph:
     def addVertex(self,vertex):
         self.vertices.add(vertex)
     def addEdge(self,edge, cost):
+        print('addEdge()',edge,cost)
         if edge not in self.edges:
+            print("if")
             self.edges.add(edge)
             self.edgeCosts.append(cost)
         for vert in edge:
