@@ -67,7 +67,7 @@ def return_data_frame(label_dict):
     print(r_label_dict)
     #paths = [f for f in os.listdir(".") if os.path.isfile(f) and "out.txt" in f]
     report_df = {}
-    keys = ["support","verts","edges","index"]#,"num_vert"
+    keys = ["support","verts","dict obj ref","edge 0","edge 1", "index"]#,"num_vert"
     for key in keys:
         report_df[key]  = []
     i='0'
@@ -83,9 +83,9 @@ def return_data_frame(label_dict):
                 print('line:')
                 print(line)
                 if len(line) == 1:
-                    report_df["verts"].append(np.array(vert))
+                    #report_df["verts"].append(np.array(vert))
                     #report_df["num_vert"].append(len(vert))
-                    report_df["edges"].append(np.array(edge))
+                    #report_df["edges"].append(np.array(edge))
                     vert  = []
                     edge  = []
                 else:
@@ -97,24 +97,30 @@ def return_data_frame(label_dict):
                         report_df["index"].append(data[2])
                         i=data[2]
                         #report_df["support"].append(data[4])
-                        report_df["support"].append("null")
+                        report_df["support"].append("null") #unused col
                         #debug
-                        vert.append(["null","null"])
-                        edge.append(["null","null"])
+                        report_df["verts"].append("null")
+                        report_df["dict obj ref"].append("null")
+                        report_df["edge 0"].append("null")
+                        report_df["edge 1"].append("null")                        
                     elif data[0] == "v":
                         print("v")
-                        vert.append([data[1],r_label_dict[data[2]]])
+                        report_df["verts"].append(data[1])
+                        report_df["dict obj ref"].append(r_label_dict[data[2]])
                         #debug
-                        edge.append(["null","null"])
+                        report_df["edge 0"].append("null")
+                        report_df["edge 1"].append("null")        
                         report_df["index"].append(i)
                         report_df["support"].append("null")
                     elif data[0] == "e":
                         print("e")
-                        edge.append([data[1],data[2]])
+                        report_df["edge 0"].append(data[1])
+                        report_df["edge 1"].append(data[2])   
                         #debug
-                        vert.append(["null","null"])
                         report_df["index"].append(i)
                         report_df["support"].append("null")
+                        report_df["verts"].append("null")
+                        report_df["dict obj ref"].append("null")
                     else:
                         pass #We skip the x
             print('finished loop')
