@@ -182,6 +182,11 @@ def writeTestFile(graphs):
     with open('input.txt','w') as fi: #We keep it as input.txt, although we can always make that part of a configuration file
         for i in range(len(graphs)):
             fi.write("t # "+str(i)+"\n")#Says what graph we are
+            print('graph is:')
+            print(graphs[i])
+            print(graphs[i][0])
+            print(graphs[i][1])
+            print(graphs[i][2])
             verts = graphs[i][0]
             edges = graphs[i][1]
             edgeCosts = graphs([i][2])
