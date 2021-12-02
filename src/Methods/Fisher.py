@@ -83,8 +83,12 @@ def createVersusDataFrame(df):
                     temp = str(object_list[j]) + " v " + str(object_list[i])
                 total_combos.append(temp)
     total_combos.sort()
+    list_of_zeros = []
     for x in total_combos:
-        print(x)
+        list_of_zeros.append(0)
+    #making the dataframe with the correct rows and columns
+    relation_dataframe = pd.DataFrame(list(zip(total_combos, list_of_zeros, list_of_zeros)),columns=["relation","percent_avg","total_appearance"])
+    print(relation_dataframe)
 
 def inList(object_list, value):
     for x in object_list:
