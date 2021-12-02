@@ -67,7 +67,7 @@ def createVersusDataFrame(df):
     object_list = []
     for value in ref_col:
         if value != "null":
-            if !(inList(object_list, value)):
+            if not(inList(object_list, value)):
                     object_list.append(value)
     print(object_list)
 
