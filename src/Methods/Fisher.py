@@ -199,7 +199,7 @@ def writeTestFile(graphs):
             print(graphs[i][2])
             verts = graphs[i][0]
             edges = graphs[i][1]
-            edgeCosts = graphs([i][2])
+            edgeCosts = graphs[i][2]
             for vert in verts:
                 fi.write("v "+str(vert[0])+" "+str(label_dict[vert[1]])+"\n")
             for e in range(len(edges)):
@@ -216,7 +216,7 @@ def return_data_frame(label_dict):
     print(r_label_dict)
     #paths = [f for f in os.listdir(".") if os.path.isfile(f) and "out.txt" in f]
     report_df = {}
-    keys = ["support","verts","dict obj ref","edge 0","edge 1", "index"]#,"num_vert"
+    keys = ["support","verts","dict obj ref","edge 0","edge 1", "edge cost" "index"]#,"num_vert"
     for key in keys:
         report_df[key]  = []
     i='0'
@@ -239,17 +239,20 @@ def return_data_frame(label_dict):
                         report_df["verts"].append("null")
                         report_df["dict obj ref"].append("null")
                         report_df["edge 0"].append("null")
-                        report_df["edge 1"].append("null")                        
+                        report_df["edge 1"].append("null")
+                        report_df["edge cost"].append("null")                        
                     elif data[0] == "v":
                         report_df["verts"].append(data[1])
                         report_df["dict obj ref"].append(r_label_dict[data[2]])
                         report_df["edge 0"].append("null")
-                        report_df["edge 1"].append("null")        
+                        report_df["edge 1"].append("null")    
+                        report_df["edge cost"].append("null")      
                         report_df["index"].append(i)
                         report_df["support"].append("null")
                     elif data[0] == "e":
                         report_df["edge 0"].append(data[1])
-                        report_df["edge 1"].append(data[2])   
+                        report_df["edge 1"].append(data[2])  
+                        report_df["edge cost"].append(data[3]) 
                         report_df["index"].append(i)
                         report_df["support"].append("null")
                         report_df["verts"].append("null")
