@@ -71,9 +71,16 @@ def createVersusDataFrame(df):
         if value != "null":
             if not(inList(object_list, value)):
                     object_list.append(value)
-    for value in object_list:
-        print(value)
-    
+    #find total relations and save them in a list in alphabetical order
+    total_combos = []
+    for i in range(0,len(object_list),1):
+        for j in range(i,len(object_list),1):
+            temp = ""
+            if object_list[i] < object_list[j]:
+                temp = str(object_list[i]) + " v " + str(object_list[j])
+            else:
+                temp = str(object_list[j]) + " v " + str(object_list[i])
+            total_combos.append(temp)
 
 def inList(object_list, value):
     for x in object_list:
