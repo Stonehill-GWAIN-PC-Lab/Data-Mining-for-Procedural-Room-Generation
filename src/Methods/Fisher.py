@@ -213,7 +213,7 @@ def arrangementModel(object, scene):
     The Arrangement Model (Fisher et al. Section 7) describes where scene objects can be placed.'''
     print('TODO')
     
-def twoObjectRelationshipProbability(obj1,obj2):
+def twoObjectRelationshipProbability(obj1,obj2, value_array = None):
     #basically finding the zscore of the relationship
     std=15.0
     mean=90.0
