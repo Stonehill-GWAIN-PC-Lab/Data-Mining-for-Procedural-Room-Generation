@@ -113,6 +113,11 @@ def return_data_frame(label_dict):
                 report_df["edges"].append(np.array(edge))
             print('no errors in if')
             print(report_df)
+            print(len(report_df))
+            print(len(report_df["support"]))
+            print(len(report_df["verts"]))
+            print(len(report_df["edges"]))
+            print(len(report_df["index"]))
         df = pd.DataFrame(report_df)
     except:
         print("Exception")
