@@ -81,6 +81,8 @@ def createVersusDataFrame(df):
             else:
                 temp = str(object_list[j]) + " v " + str(object_list[i])
             total_combos.append(temp)
+    for x in total_combos:
+        print(x)
 
 def inList(object_list, value):
     for x in object_list:
