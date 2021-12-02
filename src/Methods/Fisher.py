@@ -194,6 +194,6 @@ if __name__ == "__main__":
     removed_rooms = ["Dining_Room_Garage_Gym","Dining_Room_Kitchen_Office_Garage","Room","Living_Room_Dining_Room_Kitchen_Garage"]
     support = (20,1000)
     #sunRGBDDataMiningFisher()
-    print(twoObjectRelationshipProbability(190, 55))
-    print(twoObjectRelationshipProbability(190, 135))
+    print(twoObjectRelationshipProbability(90, 55))
+    print(twoObjectRelationshipProbability(90, 35))
     #runOccurenceModel()
