@@ -22,6 +22,7 @@ NUM_THREADS = 8
 
 #Assumes current dir = /project/ct-shml/SUNRGBD/Data-Mining-for-Procedural-Room-Generation
 path_to_data = "../../../../projectnb/ct-shml/"
+kitchen_dataframe = pd.dataFrame()
 
 def getObjects(frames):
     object_labels = []
@@ -53,11 +54,17 @@ def subprocessGraphRelations(scenes,percent_threshold,graph_func,graph_type):
     print("label dict")
     print (label_dict)
     df = return_data_frame(label_dict) #Reads back in the file as a pandas dataframe
+    createVersusDataFrame(df)
     if df is None or 'verts' not in df.columns.values:
         print('empty df')
         return None
     print("good df")
     return df
+
+def createVersusDataFrame(df):
+    kitchen_dataframe = df
+    print(df.columns)
+    print(df["ref"])
 
 def return_data_frame(label_dict):
     '''Modified function from Kermani.py with different paths'''
