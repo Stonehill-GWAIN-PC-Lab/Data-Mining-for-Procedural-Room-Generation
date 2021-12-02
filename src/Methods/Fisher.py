@@ -1,7 +1,7 @@
 # Learning implementation of methods described in:
 # M. Fisher, D. Ritchie, M. Savva, T. Funkhouser, and P. Hanrahan, “Example-based synthesis of 3D object arrangements,” ACM Transactions on Graphics (TOG), vol. 31, no. 6, p. 135, 2012.
 
-from src.Methods.Kermani import frequencyFind, graphRelationHelper, testInsert
+from src.Methods.Kermani import frequencyFind, testInsert
 from .. import ObjectMetrics
 import numpy as np
 import pandas as pd
@@ -170,7 +170,7 @@ def graphRelationHelper(graph_type,graph_func,good_objects,scene):
     graph = graph_type(objs,graph_func)
     if len(graph.vertices) == 0 or len(graph.edges) == 0:
         return None
-    res = ([(i,graph.vertices[i].label) for i in range(len(graph.vertices))],[(e[0],e[1],1) for e in graph.edges],[(ec[0]) for ec in graph.edgeCosts])
+    res = ([(i,graph.vertices[i].label) for i in range(len(graph.vertices))],[(e[0],e[1],1) for e in graph.edges],[ec for ec in graph.edgeCosts])
     del graph
     return res
 
