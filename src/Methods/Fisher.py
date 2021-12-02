@@ -91,29 +91,36 @@ def return_data_frame(label_dict):
                     print('data:',data)
                     if data[0] == "t":
                         print("t")
-                        print(data[2])
                         #This is our support and index
                         report_df["index"].append(data[2])
                         #report_df["support"].append(data[4])
-                        print("no error yet")
+                        #debugging - filling in rest of columns with nulls
+                        report_df["support"].append("null")
+                        edge.append(["null","null"])
+                        vert.append(["null","null"])
                     elif data[0] == "v":
                         print("v")
                         vert.append([data[1],r_label_dict[data[2]]])
+                        #debugging - filling in rest of columns with nulls
+                        report_df["index"].append("null")
+                        report_df["support"].append("null")
+                        edge.append(["null","null"])
                     elif data[0] == "e":
                         print("e")
                         edge.append([data[1],data[2]])
+                        #debugging - filling in rest of columns with nulls
+                        report_df["index"].append("null")
+                        report_df["support"].append("null")
+                        vert.append(["null","null"])
                     else:
                         pass #We skip the x
             print('finished loop')
             if len(vert) > 0 and len(edge) > 0: #Need to add the last one
-                print('in last if condition')
                 report_df["verts"].append(np.array(vert))
                 #report_df["num_vert"].append(len(vert))
-                print('still in if')
                 report_df["edges"].append(np.array(edge))
             print('no errors in if')
             print(report_df)
-            print(len(report_df))
             print(len(report_df["support"]))
             print(len(report_df["verts"]))
             print(len(report_df["edges"]))
