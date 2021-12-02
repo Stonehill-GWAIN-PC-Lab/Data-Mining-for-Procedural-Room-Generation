@@ -62,14 +62,18 @@ def subprocessGraphRelations(scenes,percent_threshold,graph_func,graph_type):
     return df
 
 def createVersusDataFrame(df):
+    #the purpose is to get the cross relation with every two items
     kitchen_dataframe = df
     ref_col = (df["dict obj ref"])
     object_list = []
+    #getting all the objects
     for value in ref_col:
         if value != "null":
             if not(inList(object_list, value)):
                     object_list.append(value)
-    print(object_list)
+    for value in object_list:
+        print(value)
+    
 
 def inList(object_list, value):
     for x in object_list:
