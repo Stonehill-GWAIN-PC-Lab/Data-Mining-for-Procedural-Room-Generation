@@ -26,15 +26,16 @@ kitchen_dataframe = pd.DataFrame()
 
 class SceneGraph:
     '''SceneGraph is used to store the vertices and edges that we build the furniture graphs from (for graph mining)'''
-    def __init__(self,vertices = [], edges = []):
+    def __init__(self,vertices = [], edges = [], edgeCosts = []):
         self.vertices = vertices
         self.edges  = set(edges)
-
+        self.edgeCosts = edgeCosts
     def addVertex(self,vertex):
         self.vertices.add(vertex)
     def addEdge(self,edge, cost):
         if edge not in self.edges:
-            self.edges.add([edge, cost])
+            self.edges.add(edge)
+            self.edgeCosts.add(cost)
         for vert in edge:
             if self.vertices[vert] not in self.vertices:
                 self.vertices.add(vert)
@@ -150,9 +151,10 @@ def minSpanningGraph(objects,c_func,value_array = None):
         print(edge[0])
         print(edge[1])
         if testInsert(edge[0],T):
-            T.addEdge(edge[0], edge[1]) #Add edge and the edges cost
+            T.addEdge(edge[0],edge[1]) #Add edge and the edges cost
     print("printing all edges and their cost in our graph")
     print(T.edges)
+    print(T.edgeCosts)
     return T #What we have here is an ijv sparse rep
 
 def return_data_frame(label_dict):
