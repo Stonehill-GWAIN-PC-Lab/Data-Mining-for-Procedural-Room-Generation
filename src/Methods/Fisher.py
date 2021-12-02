@@ -23,6 +23,8 @@ NUM_THREADS = 8
 #Assumes current dir = /project/ct-shml/SUNRGBD/Data-Mining-for-Procedural-Room-Generation
 path_to_data = "../../../../projectnb/ct-shml/"
 kitchen_dataframe = pd.DataFrame()
+global all_distances
+all_distances = []
 
 class SceneGraph:
     '''SceneGraph is used to store the vertices and edges that we build the furniture graphs from (for graph mining)'''
@@ -53,7 +55,9 @@ def FisherRelationships(frame,data,fi,prox_list,debug = False):
     '''Mines our different relationships by grouping objects using the similarity of their neighborhoods(Fisher et al. Section 4)'''
     #Process our data: list of FrameData objects
     print(subprocessGraphRelations(data,0.05,twoObjectRelationshipProbability,minSpanningGraph))
-
+    #trying to figure out the new mean and std based on values from all_distances
+    print("Total number of distances found:"+str(len(all_distances)))
+    print(all_distances)
 
 def subprocessGraphRelations(scenes,percent_threshold,graph_func,graph_type):
     '''Modified function from Kermani.py that does not use Gbolt dependency'''
@@ -103,7 +107,7 @@ def createVersusDataFrame(ld):
         list_of_zeros.append(0)
     #making the dataframe with the correct rows and columns
     relation_dataframe = pd.DataFrame(list(zip(total_combos, list_of_zeros, list_of_zeros)),columns=["relation","neighborhood_avg","total_appearance"])
-    print(relation_dataframe)
+    #print(relation_dataframe)
     #findRow(relation_dataframe,"bottle","garbage_bin")
     return relation_dataframe
 
@@ -288,6 +292,7 @@ def twoObjectRelationshipProbability(obj1,obj2, value_array = None):
     std=15.0
     mean=90.0
     distance = np.sqrt(np.sum((obj1.centroid-obj2.centroid)**2)) #d=sqrt((x1-x2)^2 + (y1-y2)^2 + (z1-z2)^2)
+    all_distances.append(distance)
     print("distance:",distance)
     #print(distance)
     z_score = (distance-mean)/std
