@@ -75,12 +75,14 @@ def createVersusDataFrame(df):
     total_combos = []
     for i in range(0,len(object_list),1):
         for j in range(i,len(object_list),1):
-            temp = ""
-            if object_list[i] < object_list[j]:
-                temp = str(object_list[i]) + " v " + str(object_list[j])
-            else:
-                temp = str(object_list[j]) + " v " + str(object_list[i])
-            total_combos.append(temp)
+            if(i!=j):
+                temp = ""
+                if object_list[i] < object_list[j]:
+                    temp = str(object_list[i]) + " v " + str(object_list[j])
+                else:
+                    temp = str(object_list[j]) + " v " + str(object_list[i])
+                total_combos.append(temp)
+    total_combos.sort()
     for x in total_combos:
         print(x)
 
