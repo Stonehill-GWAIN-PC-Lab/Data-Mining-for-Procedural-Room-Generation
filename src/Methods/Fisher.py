@@ -1,7 +1,7 @@
 # Learning implementation of methods described in:
 # M. Fisher, D. Ritchie, M. Savva, T. Funkhouser, and P. Hanrahan, “Example-based synthesis of 3D object arrangements,” ACM Transactions on Graphics (TOG), vol. 31, no. 6, p. 135, 2012.
 
-from src.Methods.Kermani import frequencyFind, graphRelationHelper, writeTestFile, return_data_frame, minSpanningGraph
+from src.Methods.Kermani import frequencyFind, graphRelationHelper, writeTestFile, minSpanningGraph
 from .. import ObjectMetrics
 import numpy as np
 import pandas as pd
@@ -37,6 +37,7 @@ def FisherRelationships(frame,data,fi,prox_list,debug = False):
 
 
 def subprocessGraphRelations(scenes,percent_threshold,graph_func,graph_type):
+    '''Modified function from Kermani.py that does not use Gbolt dependency'''
     min_gap = math.ceil(len(scenes) * percent_threshold) #If we dont' have our single object at the minimum threshold, we won't have any larger support
     good_objects = frequencyFind(scenes,min_gap)
     func = partial(graphRelationHelper,graph_type,graph_func,good_objects)
@@ -56,6 +57,57 @@ def subprocessGraphRelations(scenes,percent_threshold,graph_func,graph_type):
         print('empty df')
         return None
     print("good df")
+    return df
+
+def return_data_frame(label_dict):
+    '''Modified function from Kermani.py with different paths'''
+    r_label_dict = {}
+    for key in label_dict:
+        r_label_dict[label_dict[key]] = key
+    print(r_label_dict)
+    #paths = [f for f in os.listdir(".") if os.path.isfile(f) and "out.txt" in f]
+    report_df = {}
+    keys = ["support","verts","edges","index"]#,"num_vert"
+    for key in keys:
+        report_df[key]  = []
+    try: #We wrap this in a try block because it is always possible that gbolt ran out of memory and when it does we need to say that our gspan failed
+        vert = []
+        edge = []
+        with open('input.txt','r') as fi:
+            lines = fi.readlines()
+            print('printing lines)')
+            for line in lines:
+                print(line)
+                if len(line) == 1:
+                    report_df["verts"].append(np.array(vert))
+                    #report_df["num_vert"].append(len(vert))
+                    report_df["edges"].append(np.array(edge))
+                    vert  = []
+                    edge  = []
+                else:
+                    data = line.strip().split(" ")
+                    if data[0] == "t":
+                        print("t")
+                        #This is our support and index
+                        report_df["index"].append(data[2])
+                        report_df["support"].append(data[4])
+                    elif data[0] == "v":
+                        print("v")
+                        vert.append([data[1],r_label_dict[data[2]]])
+                    elif data[0] == "e":
+                        print("e")
+                        edge.append([data[1],data[2]])
+                    else:
+                        pass #We skip the x
+            if len(vert) > 0 and len(edge) > 0: #Need to add the last one
+                report_df["verts"].append(np.array(vert))
+                #report_df["num_vert"].append(len(vert))
+                report_df["edges"].append(np.array(edge))
+        df = pd.DataFrame(report_df)
+    except:
+        print("Exception")
+        return None
+    df.set_index('index',inplace = True)
     return df
 
 def runOccurenceModel():
