@@ -244,6 +244,9 @@ def minSpanningGraph(objects,c_func = ObjectMetrics.proximityCenter,value_array 
     T = SceneGraph(V) #Edges for minimum spanning tree
     while len(E) > 0:
         edge = E.pop(0)
+        print("Edge:")
+        print(edge[0])
+        print(edge[1])
         if testInsert(edge[0],T):
             T.addEdge(edge[0])
     return T #What we have here is an ijv sparse rep
