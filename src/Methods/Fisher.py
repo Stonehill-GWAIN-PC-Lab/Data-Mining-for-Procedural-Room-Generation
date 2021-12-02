@@ -1,7 +1,7 @@
 # Learning implementation of methods described in:
 # M. Fisher, D. Ritchie, M. Savva, T. Funkhouser, and P. Hanrahan, “Example-based synthesis of 3D object arrangements,” ACM Transactions on Graphics (TOG), vol. 31, no. 6, p. 135, 2012.
 
-from src.Methods.Kermani import frequencyFind, graphRelationHelper, writeTestFile, minSpanningGraph
+from src.Methods.Kermani import frequencyFind, graphRelationHelper, writeTestFile, SceneGraph, testInsert
 from .. import ObjectMetrics
 import numpy as np
 import pandas as pd
@@ -34,7 +34,7 @@ def getObjects(frames):
 def FisherRelationships(frame,data,fi,prox_list,debug = False):
     '''Mines our different relationships by grouping objects using the similarity of their neighborhoods(Fisher et al. Section 4)'''
     #Process our data: list of FrameData objects
-    print(subprocessGraphRelations(data,0.05,ObjectMetrics.proximityCenter,minSpanningGraph))
+    print(subprocessGraphRelations(data,0.05,twoObjectRelationshipProbability,minSpanningGraph))
 
 
 def subprocessGraphRelations(scenes,percent_threshold,graph_func,graph_type):
@@ -112,6 +112,32 @@ def inList(object_list, value):
             return True
     return False 
 
+def minSpanningGraph(objects,c_func,value_array = None):
+    '''Modified function from Kermani.py that creates a minSpanningGraph from our room objects.
+    Modified to use Fisher Cost function instead of just proximity'''
+    if len(objects) == 1:#Corner case (happens more than it should) a min-span tree from a graph of 1 is done
+        return SceneGraph(objects)
+    V = [o for o in objects]
+    E = []
+    #print ([str(v) for v in V])
+    for i in range(len(V)):
+        for j in range(i+1,len(V)): #These numbers link back to the objects themselves
+            c = c_func(V[i],V[j],value_array)
+            if c is not None:
+                E.append(((i,j),c)) #This has our cost function
+    E=sorted(E,key = lambda a:a[1])
+    print("E:")
+    print(E)
+    T = SceneGraph(V) #Edges for minimum spanning tree
+    while len(E) > 0:
+        edge = E.pop(0)
+        print("Edge:")
+        print(edge[0])
+        print(edge[1])
+        if testInsert(edge[0],T):
+            T.addEdge(edge[0])
+    return T #What we have here is an ijv sparse rep
+
 def return_data_frame(label_dict):
     '''Modified function from Kermani.py with different paths'''
     r_label_dict = {}
@@ -187,11 +213,12 @@ def arrangementModel(object, scene):
     The Arrangement Model (Fisher et al. Section 7) describes where scene objects can be placed.'''
     print('TODO')
     
-def twoObjectRelationshipProbability(object1_pos, object2_pos):
+def twoObjectRelationshipProbability(obj1,obj2):
     #basically finding the zscore of the relationship
     std=15.0
     mean=90.0
-    distance = abs(object1_pos - object2_pos)
+    distance = np.sum(abs(obj1.centroid - obj2.centroid))
+    print("distance:", distance)
     #print(distance)
     z_score = (distance-mean)/std
     #print(z_score)
