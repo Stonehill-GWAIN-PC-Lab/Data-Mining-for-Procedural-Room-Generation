@@ -64,9 +64,18 @@ def subprocessGraphRelations(scenes,percent_threshold,graph_func,graph_type):
 def createVersusDataFrame(df):
     kitchen_dataframe = df
     ref_col = (df["dict obj ref"])
+    object_list = []
     for value in ref_col:
         if value != "null":
-            print(value)
+            if !(inList(object_list, value)):
+                    object_list.append(value)
+    print(object_list)
+
+def inList(object_list, value):
+    for x in object_list:
+        if x == value:
+            return True
+    return False 
 
 def return_data_frame(label_dict):
     '''Modified function from Kermani.py with different paths'''
