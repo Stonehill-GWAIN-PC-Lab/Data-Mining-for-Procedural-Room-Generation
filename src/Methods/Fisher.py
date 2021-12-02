@@ -88,11 +88,15 @@ def return_data_frame(label_dict):
                     edge  = []
                 else:
                     data = line.strip().split(" ")
+                    print('data:',data)
                     if data[0] == "t":
                         print("t")
+                        print(data[2])
+                        print(data[4])
                         #This is our support and index
                         report_df["index"].append(data[2])
                         report_df["support"].append(data[4])
+                        print("no error yet")
                     elif data[0] == "v":
                         print("v")
                         vert.append([data[1],r_label_dict[data[2]]])
