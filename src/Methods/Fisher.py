@@ -1,7 +1,7 @@
 # Learning implementation of methods described in:
 # M. Fisher, D. Ritchie, M. Savva, T. Funkhouser, and P. Hanrahan, “Example-based synthesis of 3D object arrangements,” ACM Transactions on Graphics (TOG), vol. 31, no. 6, p. 135, 2012.
 
-from src.Methods.Kermani import frequencyFind, graphRelationHelper, writeTestFile, testInsert
+from src.Methods.Kermani import frequencyFind, graphRelationHelper, testInsert
 from .. import ObjectMetrics
 import numpy as np
 import pandas as pd
@@ -29,7 +29,7 @@ class SceneGraph:
     def __init__(self,vertices = [], edges = [], edgeCosts = []):
         self.vertices = vertices
         self.edges  = set(edges)
-        self.edgeCosts = set(edgeCosts)
+        self.edgeCosts = edgeCosts
     def addVertex(self,vertex):
         self.vertices.add(vertex)
     def addEdge(self,edge, cost):
@@ -153,8 +153,8 @@ def minSpanningGraph(objects,c_func,value_array = None):
         if testInsert(edge[0],T):
             T.addEdge(edge[0],edge[1]) #Add edge and the edges cost
     print("printing all edges and their cost in our graph")
-    print(T.edges)
-    print(T.edgeCosts)
+    print("edges:",T.edges)
+    print("edgecosts:",T.edgeCosts)
     return T #What we have here is an ijv sparse rep
 
 def writeTestFile(graphs):
