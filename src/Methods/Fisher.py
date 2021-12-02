@@ -22,9 +22,6 @@ NUM_THREADS = 8
 
 #Assumes current dir = /project/ct-shml/SUNRGBD/Data-Mining-for-Procedural-Room-Generation
 path_to_data = "../../../../projectnb/ct-shml/"
-kitchen_dataframe = pd.DataFrame()
-global all_distances
-all_distances = []
 
 class SceneGraph:
     '''SceneGraph is used to store the vertices and edges that we build the furniture graphs from (for graph mining)'''
@@ -54,6 +51,8 @@ def getObjects(frames):
 def FisherRelationships(frame,data,fi,prox_list,debug = False):
     '''Mines our different relationships by grouping objects using the similarity of their neighborhoods(Fisher et al. Section 4)'''
     #Process our data: list of FrameData objects
+    global all_distances
+    all_distances = []
     print(subprocessGraphRelations(data,0.05,twoObjectRelationshipProbability,minSpanningGraph))
     #trying to figure out the new mean and std based on values from all_distances
     print("Total number of distances found:"+str(len(all_distances)))
