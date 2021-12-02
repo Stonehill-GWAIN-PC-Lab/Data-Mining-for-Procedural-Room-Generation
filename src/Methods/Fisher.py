@@ -29,7 +29,7 @@ class SceneGraph:
     def __init__(self,vertices = [], edges = [], edgeCosts = []):
         self.vertices = vertices
         self.edges  = set(edges)
-        self.edgeCosts = edgeCosts
+        self.edgeCosts = set(edgeCosts)
     def addVertex(self,vertex):
         self.vertices.add(vertex)
     def addEdge(self,edge, cost):
