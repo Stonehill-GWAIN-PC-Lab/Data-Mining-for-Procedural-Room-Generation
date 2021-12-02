@@ -237,11 +237,14 @@ def twoObjectRelationshipProbability(obj1,obj2, value_array = None):
     std=15.0
     mean=90.0
     distance = np.sqrt(np.sum((obj1.centroid-obj2.centroid)**2)) #d=sqrt((x1-x2)^2 + (y1-y2)^2 + (z1-z2)^2)
+    print("distance:",d)
     #print(distance)
     z_score = (distance-mean)/std
     #print(z_score)
+    print("zscore:",z_score)
     probability = round(st.norm.cdf(z_score), 5)
     #print(probability)
+    print("prob:",probability)
     if(probability>.5):
         return 1- ( (probability-.5) /.5)
     if(probability<.5):
