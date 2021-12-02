@@ -288,7 +288,7 @@ def graphRelationHelper(graph_type,graph_func,good_objects,scene):
     graph = graph_type(objs,graph_func)
     if len(graph.vertices) == 0 or len(graph.edges) == 0:
         return None
-    res = ([(i,graph.vertices[i].label) for i in range(len(graph.vertices))],[(e[0],e[1],1) for e in graph.edges])
+    res = ([(i,graph.vertices[i].label) for i in range(len(graph.vertices))],[(e[0],e[1],1) for e in graph.edges],[(ec[0]) for ec in graph.edgeCosts])
     del graph
     return res
 
