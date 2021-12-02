@@ -131,6 +131,8 @@ def writeTestFile(graphs):
     labels = set(labels)
     label_dict = {}
     counter = 0
+    print("----------Here are the labels--------------")
+    print(labels)
     for label in labels:
         label_dict[label] = str(counter)
         counter +=1
