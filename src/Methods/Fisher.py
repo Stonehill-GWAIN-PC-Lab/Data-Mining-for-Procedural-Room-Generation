@@ -76,72 +76,43 @@ def return_data_frame(label_dict):
         edge = []
         with open('input.txt','r') as fi:
             lines = fi.readlines()
-            print('printing lines')
-            print(lines)
-            print(len(lines))
             for line in lines:
-                print('line:')
-                print(line)
                 if len(line) == 1:
-                    #report_df["verts"].append(np.array(vert))
-                    #report_df["num_vert"].append(len(vert))
-                    #report_df["edges"].append(np.array(edge))
                     vert  = []
                     edge  = []
                 else:
                     data = line.strip().split(" ")
                     print('data:',data)
                     if data[0] == "t":
-                        print("t")
-                        #This is our support and index
                         report_df["index"].append(data[2])
                         i=data[2]
-                        #report_df["support"].append(data[4])
                         report_df["support"].append("null") #unused col
-                        #debug
                         report_df["verts"].append("null")
                         report_df["dict obj ref"].append("null")
                         report_df["edge 0"].append("null")
                         report_df["edge 1"].append("null")                        
                     elif data[0] == "v":
-                        print("v")
                         report_df["verts"].append(data[1])
                         report_df["dict obj ref"].append(r_label_dict[data[2]])
-                        #debug
                         report_df["edge 0"].append("null")
                         report_df["edge 1"].append("null")        
                         report_df["index"].append(i)
                         report_df["support"].append("null")
                     elif data[0] == "e":
-                        print("e")
                         report_df["edge 0"].append(data[1])
                         report_df["edge 1"].append(data[2])   
-                        #debug
                         report_df["index"].append(i)
                         report_df["support"].append("null")
                         report_df["verts"].append("null")
                         report_df["dict obj ref"].append("null")
                     else:
                         pass #We skip the x
-            print('finished loop')
-            #if len(vert) > 0 and len(edge) > 0: #Need to add the last one
-            #    report_df["verts"].append(np.array(vert))
-            #    #report_df["num_vert"].append(len(vert))
-            #    report_df["edges"].append(np.array(edge))
-            print('no errors in if')
-            print(report_df)
-            print(np.shape(report_df["support"]))
-            print(np.shape(report_df["verts"]))
-            print(np.shape(report_df["dict obj ref"]))
-            print(np.shape(report_df["edge 0"]))
-            print(np.shape(report_df["edge 1"]))
-            print(np.shape(report_df["index"]))
         df = pd.DataFrame(report_df)
-        print(df)
     except:
         print("Exception")
         return None
     df.set_index('index',inplace = True)
+    print(df)
     return df
 
 def runOccurenceModel():
