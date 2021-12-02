@@ -95,7 +95,6 @@ def return_data_frame(label_dict):
                         #This is our support and index
                         report_df["index"].append(data[2])
                         #report_df["support"].append(data[4])
-                        report_df["support"].append("not sure what this is data[4]")
                         print("no error yet")
                     elif data[0] == "v":
                         print("v")
