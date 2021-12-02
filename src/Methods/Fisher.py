@@ -87,12 +87,15 @@ def return_data_frame(label_dict):
                 else:
                     data = line.strip().split(" ")
                     if data[0] == "t":
+                        print("t")
                         #This is our support and index
                         report_df["index"].append(data[2])
                         report_df["support"].append(data[4])
                     elif data[0] == "v":
+                        print("v")
                         vert.append([data[1],r_label_dict[data[2]]])
                     elif data[0] == "e":
+                        print("e")
                         edge.append([data[1],data[2]])
                     else:
                         pass #We skip the x
@@ -102,6 +105,7 @@ def return_data_frame(label_dict):
                 report_df["edges"].append(np.array(edge))
         df = pd.DataFrame(report_df)
     except:
+        print("Exception")
         return None
     df.set_index('index',inplace = True)
     return df
