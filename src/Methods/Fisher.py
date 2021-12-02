@@ -136,7 +136,7 @@ def twoObjectRelationshipProbability(object1_pos, object2_pos):
     probability = round(st.norm.cdf(z_score), 5)
     if(probability>.5):
         return .5/probability
-    else:
+    if(probability<.5):
         return .5/( (.5-probability)*2 + probability)
     return 1
 
@@ -186,6 +186,6 @@ if __name__ == "__main__":
     same_objects = {"fridge":"refridgerator","bathroomvanity":"bathroom_vanity","toyhouse":"toy_house","bookshelf":"book_shelf","tissuebox":"tissue_box"}
     removed_rooms = ["Dining_Room_Garage_Gym","Dining_Room_Kitchen_Office_Garage","Room","Living_Room_Dining_Room_Kitchen_Garage"]
     support = (20,1000)
-    sunRGBDDataMiningFisher()
-    #print(twoObjectRelationshipProbability(190, 100))
+    #sunRGBDDataMiningFisher()
+    print(twoObjectRelationshipProbability(190, 1))
     #runOccurenceModel()
