@@ -92,7 +92,6 @@ def return_data_frame(label_dict):
                     if data[0] == "t":
                         print("t")
                         print(data[2])
-                        print(data[4])
                         #This is our support and index
                         report_df["index"].append(data[2])
                         #report_df["support"].append(data[4])
