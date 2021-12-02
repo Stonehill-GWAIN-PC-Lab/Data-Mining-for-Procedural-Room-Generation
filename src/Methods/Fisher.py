@@ -138,7 +138,7 @@ def twoObjectRelationshipProbability(object1_pos, object2_pos):
     z_score = (distance-mean)/std
     #print(z_score)
     probability = round(st.norm.cdf(z_score), 5)
-    print(probability)
+    #print(probability)
     if(probability>.5):
         return 1- ( (probability-.5) /.5)
     if(probability<.5):
@@ -192,5 +192,6 @@ if __name__ == "__main__":
     removed_rooms = ["Dining_Room_Garage_Gym","Dining_Room_Kitchen_Office_Garage","Room","Living_Room_Dining_Room_Kitchen_Garage"]
     support = (20,1000)
     #sunRGBDDataMiningFisher()
-    print(twoObjectRelationshipProbability(190, 1))
+    print(twoObjectRelationshipProbability(190, 11))
+    print(twoObjectRelationshipProbability(190, 11))
     #runOccurenceModel()
