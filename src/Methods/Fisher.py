@@ -93,15 +93,18 @@ def createVersusDataFrame(df):
     return relation_dataframe
 
 def findRow(relation_dataframe, object1, object2):
+    #returns the row of the relation in the dataframe
     mask = []
     if object1 < object2:
         mask = relation_dataframe["relation"] == str(str(object1) + " v " + str(object2))
     else:
         mask = relation_dataframe["relation"] == str(str(object2) + " v " + str(object1))
-    print(mask)
+    #print(mask)
     for i in range(0,len(relation_dataframe),1):
         if mask[i]==True:
-            print(i)
+            return(i)
+    #returns -1 if error
+    return -1
 
 def inList(object_list, value):
     for x in object_list:
