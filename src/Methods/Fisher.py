@@ -22,7 +22,7 @@ NUM_THREADS = 8
 
 #Assumes current dir = /project/ct-shml/SUNRGBD/Data-Mining-for-Procedural-Room-Generation
 path_to_data = "../../../../projectnb/ct-shml/"
-kitchen_dataframe = pd.dataFrame()
+kitchen_dataframe = pd.DataFrame()
 
 def getObjects(frames):
     object_labels = []
