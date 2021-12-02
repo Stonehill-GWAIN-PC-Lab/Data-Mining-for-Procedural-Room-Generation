@@ -72,6 +72,7 @@ def subprocessGraphRelations(scenes,percent_threshold,graph_func,graph_type):
     print("label dict")
     print (label_dict)
     df = return_data_frame(label_dict) #Reads back in the file as a pandas dataframe
+    print(df)
     createVersusDataFrame(df)
     if df is None or 'verts' not in df.columns.values:
         print('empty df')
