@@ -73,23 +73,19 @@ def subprocessGraphRelations(scenes,percent_threshold,graph_func,graph_type):
     print (label_dict)
     df = return_data_frame(label_dict) #Reads back in the file as a pandas dataframe
     print(df)
-    createVersusDataFrame(df)
+    createVersusDataFrame(label_dict)
     if df is None or 'verts' not in df.columns.values:
         print('empty df')
         return None
     print("good df")
     return df
 
-def createVersusDataFrame(df):
+def createVersusDataFrame(ld):
     #the purpose is to get the cross relation with every two items
-    kitchen_dataframe = df
-    ref_col = (df["dict obj ref"])
-    object_list = []
+    #kitchen_dataframe
+    print("in createVersusDataFrame")
     #getting all the objects
-    for value in ref_col:
-        if value != "null":
-            if not(inList(object_list, value)):
-                    object_list.append(value)
+    object_list = list(ld)
     #find total relations and save them in a list in alphabetical order
     total_combos = []
     for i in range(0,len(object_list),1):
@@ -108,7 +104,7 @@ def createVersusDataFrame(df):
     #making the dataframe with the correct rows and columns
     relation_dataframe = pd.DataFrame(list(zip(total_combos, list_of_zeros, list_of_zeros)),columns=["relation","neighborhood_avg","total_appearance"])
     print(relation_dataframe)
-    findRow(relation_dataframe,"bottle","garbage_bin")
+    #findRow(relation_dataframe,"bottle","garbage_bin")
     return relation_dataframe
 
 def findRow(relation_dataframe, object1, object2):
