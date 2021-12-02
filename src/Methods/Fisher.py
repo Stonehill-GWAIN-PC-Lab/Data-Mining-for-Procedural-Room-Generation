@@ -205,7 +205,7 @@ def writeTestFile(graphs):
             for e in range(len(edges)):
                 edge = edges[e]
                 edgeCost = edgeCosts[e]
-                fi.write("e "+str(edge[0])+" "+str(edge[1])+" "+str(edgeCost[0])+"\n")
+                fi.write("e "+str(edge[0])+" "+str(edge[1])+" "+str(edgeCost)+"\n")
     return label_dict
 
 def return_data_frame(label_dict):
