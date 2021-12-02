@@ -77,6 +77,7 @@ def return_data_frame(label_dict):
             lines = fi.readlines()
             print('printing lines')
             print(lines)
+            print(len(lines))
             for line in lines:
                 print('line:')
                 print(line)
@@ -125,7 +126,8 @@ def return_data_frame(label_dict):
             print(len(report_df["verts"]))
             print(len(report_df["edges"]))
             print(len(report_df["index"]))
-        df = pd.DataFrame(report_df)
+        df = pd.DataFrame(report_df["index"])
+        print(df)
     except:
         print("Exception")
         return None
