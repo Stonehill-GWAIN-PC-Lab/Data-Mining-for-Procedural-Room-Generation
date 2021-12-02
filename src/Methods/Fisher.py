@@ -105,7 +105,9 @@ def return_data_frame(label_dict):
                         edge.append([data[1],data[2]])
                     else:
                         pass #We skip the x
+            print('finished loop')
             if len(vert) > 0 and len(edge) > 0: #Need to add the last one
+                print('in last if condition')
                 report_df["verts"].append(np.array(vert))
                 #report_df["num_vert"].append(len(vert))
                 report_df["edges"].append(np.array(edge))
