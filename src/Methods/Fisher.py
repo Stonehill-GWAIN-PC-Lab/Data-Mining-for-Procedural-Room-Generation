@@ -157,6 +157,35 @@ def minSpanningGraph(objects,c_func,value_array = None):
     print(T.edgeCosts)
     return T #What we have here is an ijv sparse rep
 
+def writeTestFile(graphs):
+    '''gbolt doesn't support string labels, so we have to give it a non-string label.
+    Hence, this function is necessary'''
+    labels = []
+    for graph in graphs:
+        verts = graph[0]
+        labels.extend([vert[1] for vert in verts])
+    labels = set(labels)
+    label_dict = {}
+    counter = 0
+    #print("----------Here are the labels--------------")
+    #print(labels)
+    for label in labels:
+        label_dict[label] = str(counter)
+        counter +=1
+    with open('input.txt','w') as fi: #We keep it as input.txt, although we can always make that part of a configuration file
+        for i in range(len(graphs)):
+            fi.write("t # "+str(i)+"\n")#Says what graph we are
+            verts = graphs[i][0]
+            edges = graphs[i][1]
+            edgeCosts = graphs([i][2])
+            for vert in verts:
+                fi.write("v "+str(vert[0])+" "+str(label_dict[vert[1]])+"\n")
+            for e in range(len(edges)):
+                edge = edges[e]
+                edgeCost = edgeCosts[e]
+                fi.write("e "+str(edge[0])+" "+str(edge[1])+" "+str(edgeCost[0])+"\n")
+    return label_dict
+
 def return_data_frame(label_dict):
     '''Modified function from Kermani.py with different paths'''
     r_label_dict = {}
