@@ -124,15 +124,17 @@ def return_data_frame(label_dict):
                     else:
                         pass #We skip the x
             print('finished loop')
-            if len(vert) > 0 and len(edge) > 0: #Need to add the last one
-                report_df["verts"].append(np.array(vert))
-                #report_df["num_vert"].append(len(vert))
-                report_df["edges"].append(np.array(edge))
+            #if len(vert) > 0 and len(edge) > 0: #Need to add the last one
+            #    report_df["verts"].append(np.array(vert))
+            #    #report_df["num_vert"].append(len(vert))
+            #    report_df["edges"].append(np.array(edge))
             print('no errors in if')
             print(report_df)
             print(np.shape(report_df["support"]))
             print(np.shape(report_df["verts"]))
-            print(np.shape(report_df["edges"]))
+            print(np.shape(report_df["dict obj ref"]))
+            print(np.shape(report_df["edge 0"]))
+            print(np.shape(report_df["edge 1"]))
             print(np.shape(report_df["index"]))
         df = pd.DataFrame(report_df)
         print(df)
