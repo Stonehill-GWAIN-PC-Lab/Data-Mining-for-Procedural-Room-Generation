@@ -147,6 +147,7 @@ def minSpanningGraph(objects,c_func,value_array = None):
     print("E:")
     print(E)
     T = SceneGraph(V) #Edges for minimum spanning tree
+    T.edgeCosts=[] #reset edges
     print('pre function:')
     print(T.vertices)
     print(T.edges)
