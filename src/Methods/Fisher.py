@@ -75,8 +75,10 @@ def return_data_frame(label_dict):
         edge = []
         with open('input.txt','r') as fi:
             lines = fi.readlines()
-            print('printing lines)')
+            print('printing lines')
+            print(lines)
             for line in lines:
+                print('line:')
                 print(line)
                 if len(line) == 1:
                     report_df["verts"].append(np.array(vert))
