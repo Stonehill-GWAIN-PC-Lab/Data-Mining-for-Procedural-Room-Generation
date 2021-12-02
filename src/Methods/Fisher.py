@@ -89,6 +89,7 @@ def createVersusDataFrame(df):
     #making the dataframe with the correct rows and columns
     relation_dataframe = pd.DataFrame(list(zip(total_combos, list_of_zeros, list_of_zeros)),columns=["relation","neighborhood_avg","total_appearance"])
     print(relation_dataframe)
+    findRow(relation_dataframe,"bottle","garbage_bin")
     return relation_dataframe
 
 def findRow(relation_dataframe, object1, object2):
