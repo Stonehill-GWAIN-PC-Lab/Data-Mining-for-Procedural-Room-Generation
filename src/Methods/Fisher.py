@@ -57,12 +57,6 @@ def FisherRelationships(frame,data,fi,prox_list,debug = False):
     print("Total number of distances found:"+str(len(all_distances)))
     print(all_distances)
 
-def getDistanceMetrics():
-    global all_distances
-    print(len(all_distances))
-    print(all_distances)
-    print(np.average(all_distances))
-
 def subprocessGraphRelations(scenes,percent_threshold,graph_func,graph_type):
     '''Modified function from Kermani.py that does not use Gbolt dependency'''
     min_gap = math.ceil(len(scenes) * percent_threshold) #If we dont' have our single object at the minimum threshold, we won't have any larger support
@@ -330,7 +324,9 @@ def twoObjectRelationshipProbability(obj1,obj2, value_array = None):
     distance = np.sqrt(np.sum((obj1.centroid-obj2.centroid)**2)) #d=sqrt((x1-x2)^2 + (y1-y2)^2 + (z1-z2)^2)
     global all_distances
     all_distances.append(distance)
+    print("distance stuff")
     print(len(all_distances))
+    print(np.average(all_distances))
     print("distance:",distance)
     #print(distance)
     z_score = (distance-mean)/std
@@ -392,5 +388,4 @@ if __name__ == "__main__":
     removed_rooms = ["Dining_Room_Garage_Gym","Dining_Room_Kitchen_Office_Garage","Room","Living_Room_Dining_Room_Kitchen_Garage"]
     support = (20,1000)
     sunRGBDDataMiningFisher()
-    getDistanceMetrics()
     #runOccurenceModel()
