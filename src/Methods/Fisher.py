@@ -59,7 +59,55 @@ def FisherRelationships(frame,data,fi,prox_list,debug = False):
     arrangementModel(local_df,relationDf)
 
 def arrangementModel(scenes_df, relationDf):
+    #strongest
     print(relationDf.sort_values(by='neighborhood_avg', ascending=False))
+    o1name = "bowl"
+    o1x = []
+    o1y = []
+    o2x = []
+    o2y = []
+    o2name = "chair"
+    for scene in range(0,341,1):
+        m = df.index==str(scene)
+        smaller_df = df[m]
+        #print(smaller_df)
+        #splitting the dataframe into list cause i'm tired and don't want to figure out how dataframes work at 2:30am
+        vcx = list(smaller_df["vert centroid x"])
+        vcy = list(smaller_df["vert centroid y"])
+        vcz = list(smaller_df["vert centroid z"])
+        dor = list(smaller_df["dict obj ref"])
+        #only doing these cause I believe its all I need
+        #initializing variables
+        the_distances = []
+        #print(len(smaller_df))
+        for i in range(0,len(smaller_df)-1,1):
+            object1x = vcx[i]
+            object1y = vcy[i]
+            object1z = vcz[i]
+            object1r = dor[i]
+            if object1r != "null":
+                for j in range(i+1,len(smaller_df),1):
+                    object2x = vcx[j]
+                    object2y = vcy[j]
+                    object2z = vcz[j]
+                    object2r = dor[j]
+                    if (object1r == o1name and object2r == o2name) or (object1r == o2name and object2r == o1name):
+                        if(object1r == o1name):
+                            o1x.append(object1x)
+                            o1y.append(object1y)
+                            o2x.append(object2x)
+                            o2y.append(object2y)
+                        else:
+                            o2x.append(object1x)
+                            o2y.append(object1y)
+                            o1x.append(object2x)
+                            o1y.append(object2y)
+
+    print(o1x)
+    print(o1y)
+    print(o2x)
+    print(o2y)
+    #most
 
 def buildRelationshipDataFrame(df):
     print("in buildRelationshipDataFrame")
