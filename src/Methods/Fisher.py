@@ -260,6 +260,15 @@ def return_data_frame(label_dict):
                         report_df["dict obj ref"].append("null")
                     else:
                         pass #We skip the x
+        print("printing df")
+        print(len(report_df["supports"]))
+        print(len(report_df["verts"]))
+        print(len(report_df["dict obj ref"]))
+        print(len(report_df["edge 0"]))
+        print(len(report_df["edge 1"]))
+        print(len(report_df["edge cost"]))
+        print(len(report_df["index"]))
+
         df = pd.DataFrame(report_df)
     except:
         print("Exception")
