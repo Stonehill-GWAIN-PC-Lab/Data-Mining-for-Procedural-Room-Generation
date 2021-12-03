@@ -58,7 +58,7 @@ def FisherRelationships(frame,data,fi,prox_list,debug = False):
 def buildRelationshipDataFrame(df):
     #cols support verts       vert centroid x     vert centroid y       vert centroid z     dict obj ref edge 0 edge 1 edge cost
     #find the empty rows, the beginning of the next scene
-    row_mask = df["support"]=="null" #and df["verts"]=="null" and df["vert centroid x"]=="null" and df["vert centroid y"]=="null" and df["dict obj ref"]=="null" and df["edge 0"]=="null" and df["edge 1"]=="null" and df["edge cost"]=="null"
+    row_mask = df["support"]#=="null" #and df["verts"]=="null" and df["vert centroid x"]=="null" and df["vert centroid y"]=="null" and df["dict obj ref"]=="null" and df["edge 0"]=="null" and df["edge 1"]=="null" and df["edge cost"]=="null"
     print(df[row_mask])
 
 def subprocessGraphRelations(scenes,percent_threshold,graph_func,graph_type):
