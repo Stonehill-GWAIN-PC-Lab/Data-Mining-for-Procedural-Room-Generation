@@ -97,11 +97,11 @@ def buildRelationshipDataFrame(df):
                         distance = np.sqrt( (float(object1x)-float(object2x))**2 + (float(object1y)-float(object2y))**2 + (float(object1z)-float(object2z))**2 ) #d=sqrt((x1-x2)^2 + (y1-y2)^2 + (z1-z2)^2)
                         the_distances.append(distance)
                         prob = newPropRelationshipFinder(distance)
-                        print("Comparing distances of "+str(object1r)+" v "+str(object2r)+" ----Distance:"+str(distance)+" ------Prob:"+str(prob))
+                        #print("Comparing distances of "+str(object1r)+" v "+str(object2r)+" ----Distance:"+str(distance)+" ------Prob:"+str(prob))
                         row = findRow(vdf,object1r, object2r)
                         #modify table
                         total_appearance[row] = total_appearance[row]+1
-                        total_prob[row] = total_prob[row]
+                        total_prob[row] = total_prob[row] + prob
                         #print(distance)
 
     #then like actually make the avg
@@ -111,7 +111,7 @@ def buildRelationshipDataFrame(df):
             avg_prob[i] = total_prob[i]/total_appearance[i]
     #create new relationdf
     final_relation_dataframe = newCreateVersusDataFrame(name_relation,avg_prob,total_prob,total_appearance)
-    #print(final_relation_dataframe)
+    print(final_relation_dataframe)
     #mean = meanCalc(the_distances)
     #print("Mean:",mean)
     #std = stdCalc(mean, the_distances)
@@ -137,7 +137,7 @@ def newPropRelationshipFinder(distance):
     mean=1.05
     #print(distance)
     z_score = (distance-mean)/std
-    print(z_score)
+    #print(z_score)
     probability = round(st.norm.cdf(z_score), 5)
     #print(probability)
     if(probability>.5):
