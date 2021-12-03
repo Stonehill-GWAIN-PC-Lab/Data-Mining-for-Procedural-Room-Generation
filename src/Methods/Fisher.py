@@ -75,10 +75,10 @@ def buildRelationshipDataFrame(df):
         object1r = dor[i]
         if object1r != "null":
             for j in range(i,len(m),1):
-                object1x = vcx[i]
-                object1y = vcy[i]
-                object1z = vcz[i]
-                object1r = dor[i]
+                object2x = vcx[i]
+                object2y = vcy[i]
+                object2z = vcz[i]
+                object2r = dor[i]
                 if object1r != "null" and object2r != "null":
                     print("Comparing distances of"+str(object1r)+str(object2r))
         
@@ -87,6 +87,31 @@ def buildRelationshipDataFrame(df):
     #for i in range(0,341,1):
         #mask = 
         #smaller_df = 
+
+#created because I didn't want to change the old cold and break something else
+def newPropRelationshipFinder(obj1,obj2, value_array = None):
+    #basically finding the zscore of the relationship
+    std=15.0
+    mean=90.0
+    distance = np.sqrt(np.sum((obj1.centroid-obj2.centroid)**2)) #d=sqrt((x1-x2)^2 + (y1-y2)^2 + (z1-z2)^2)
+    global all_distances
+    all_distances.append(distance)
+    print("distance stuff")
+    print(len(all_distances))
+    print(np.average(all_distances))
+    print("distance:",distance)
+    #print(distance)
+    z_score = (distance-mean)/std
+    #print(z_score)
+    print("zscore:",z_score)
+    probability = round(st.norm.cdf(z_score), 5)
+    #print(probability)
+    print("prob:",probability)
+    if(probability>.5):
+        return 1- ( (probability-.5) /.5)
+    if(probability<.5):
+        return probability/.5
+    return 1
 
 def subprocessGraphRelations(scenes,percent_threshold,graph_func,graph_type):
     '''Modified function from Kermani.py that does not use Gbolt dependency'''
