@@ -156,7 +156,9 @@ def minSpanningGraph(objects,c_func,value_array = None):
     print("printing all edges and their cost in our graph")
     print("edges:",T.edges)
     print("edgecosts:",T.edgeCosts)
-    print("vertices",T.vertices)
+    print("vertices")
+    for i in T.vertices:
+        print(i.centroid)
     return T #What we have here is an ijv sparse rep
 
 def graphRelationHelper(graph_type,graph_func,good_objects,scene):
