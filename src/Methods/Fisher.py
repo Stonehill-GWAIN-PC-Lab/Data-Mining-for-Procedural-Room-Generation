@@ -60,9 +60,10 @@ def FisherRelationships(frame,data,fi,prox_list,debug = False):
 def buildRelationshipDataFrame(df):
     print("in buildRelationshipDataFrame")
     #create the three lists
-    print(real_label_dict)
-    #createVersusDataFrame(label_dict)
-    #avg prob
+    #print(real_label_dict)
+    vdf = createVersusDataFrame(real_label_dict)
+    print(vdf)
+    #avg_prob = 
     #total_appearance = 
     #cols support verts       vert centroid x     vert centroid y       vert centroid z     dict obj ref edge 0 edge 1 edge cost
     for scene in range(0,341,1):
