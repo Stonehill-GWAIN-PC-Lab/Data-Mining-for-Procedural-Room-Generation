@@ -31,10 +31,8 @@ class SceneGraph:
         self.edgeCosts = edgeCosts
     def addVertex(self,vertex):
         self.vertices.add(vertex)
-    def addEdge(self,edge, cost):
-        print('addEdge()',edge,cost)
+    def addEdge(self,edge,cost):
         if edge not in self.edges:
-            print("if")
             self.edges.add(edge)
             self.edgeCosts.append(cost)
         for vert in edge:
@@ -158,6 +156,7 @@ def minSpanningGraph(objects,c_func,value_array = None):
     print("printing all edges and their cost in our graph")
     print("edges:",T.edges)
     print("edgecosts:",T.edgeCosts)
+    print("vertices",T.vertices)
     return T #What we have here is an ijv sparse rep
 
 def graphRelationHelper(graph_type,graph_func,good_objects,scene):
