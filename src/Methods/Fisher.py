@@ -61,7 +61,13 @@ def buildRelationshipDataFrame(df):
     #find the empty rows, the beginning of the next scene
     row_mask1 = df["support"]=="null" #and df["verts"]=="null" #and df["vert centroid x"]=="null" and df["vert centroid y"]=="null" and df["dict obj ref"]=="null" and df["edge 0"]=="null" and df["edge 1"]=="null" and df["edge cost"]=="null"
     row_mask2 = df["verts"]=="null"
-    print(df[row_mask1][row_mask2])
+    row_mask3 = df["vert centroid x"]=="null"
+    row_mask4 = df["vert centroid y"]=="null"
+    row_mask5 = df["dict obj ref"]=="null"
+    row_mask6 = df["edge 0"]=="null"
+    row_mask7 = df["edge 1"]=="null"
+    row_mask8 = df["edge cost"]=="null"
+    print(df[row_mask1][row_mask2][row_mask3][row_mask4][row_mask5][row_mask6][row_mask7][row_mask8])
 
 def subprocessGraphRelations(scenes,percent_threshold,graph_func,graph_type):
     '''Modified function from Kermani.py that does not use Gbolt dependency'''
