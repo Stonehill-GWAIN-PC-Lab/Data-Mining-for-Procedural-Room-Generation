@@ -74,13 +74,14 @@ def buildRelationshipDataFrame(df):
         object1z = vcz[i]
         object1r = dor[i]
         if object1r != "null":
-            for j in range(i,len(m),1):
-                object2x = vcx[i]
-                object2y = vcy[i]
-                object2z = vcz[i]
-                object2r = dor[i]
+            for j in range(i+1,len(m),1):
+                object2x = vcx[j]
+                object2y = vcy[j]
+                object2z = vcz[j]
+                object2r = dor[j]
                 if object1r != "null" and object2r != "null":
                     print("Comparing distances of"+str(object1r)+str(object2r))
+                    #distance = np.sqrt(np.sum((obj1.centroid-obj2.centroid)**2)) #d=sqrt((x1-x2)^2 + (y1-y2)^2 + (z1-z2)^2)
         
 
     #splitting up the scenes
@@ -89,7 +90,7 @@ def buildRelationshipDataFrame(df):
         #smaller_df = 
 
 #created because I didn't want to change the old cold and break something else
-def newPropRelationshipFinder(obj1,obj2, value_array = None):
+def newPropRelationshipFinder(distance):
     #basically finding the zscore of the relationship
     std=15.0
     mean=90.0
