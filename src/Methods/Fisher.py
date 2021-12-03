@@ -212,7 +212,7 @@ def return_data_frame(label_dict):
     print(r_label_dict)
     #paths = [f for f in os.listdir(".") if os.path.isfile(f) and "out.txt" in f]
     report_df = {}
-    keys = ["support","verts","dict obj ref","edge 0","edge 1", "edge cost" "index"]#,"num_vert"
+    keys = ["support","verts","dict obj ref","edge 0","edge 1", "edge cost", "index"]#,"num_vert"
     for key in keys:
         report_df[key]  = []
     i='0'
@@ -229,6 +229,7 @@ def return_data_frame(label_dict):
                     data = line.strip().split(" ")
                     print('data:',data)
                     if data[0] == "t":
+                        print('data is t')
                         report_df["index"].append(data[2])
                         i=data[2]
                         report_df["support"].append("null") #unused col
@@ -236,7 +237,7 @@ def return_data_frame(label_dict):
                         report_df["dict obj ref"].append("null")
                         report_df["edge 0"].append("null")
                         report_df["edge 1"].append("null")
-                        report_df["edge cost"].append("null")                        
+                        report_df["edge cost"].append("null")
                     elif data[0] == "v":
                         report_df["verts"].append(data[1])
                         report_df["dict obj ref"].append(r_label_dict[data[2]])
