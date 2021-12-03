@@ -60,7 +60,8 @@ def FisherRelationships(frame,data,fi,prox_list,debug = False):
 def buildRelationshipDataFrame(df):
     print("in buildRelationshipDataFrame")
     #create the three lists
-    #print(real_label_dict)
+    print("printing real_label_dict")
+    print(real_label_dict)
     vdf = createVersusDataFrame(real_label_dict)
     print(vdf)
     avg_prob = [0] * len(vdf)
@@ -78,7 +79,7 @@ def buildRelationshipDataFrame(df):
         #only doing these cause I believe its all I need
         #initializing variables
         the_distances = []
-        print(len(smaller_df))
+        #print(len(smaller_df))
         for i in range(0,len(smaller_df)-1,1):
             object1x = vcx[i]
             object1y = vcy[i]
