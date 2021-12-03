@@ -159,7 +159,9 @@ def minSpanningGraph(objects,c_func,value_array = None):
     print("vertices")
     for i in T.vertices:
         print("entry")
-        print(i.centroid)
+        print(i.centroid[0])
+        print(i.centroid[1])
+        print(i.centroid[2])
     return T #What we have here is an ijv sparse rep
 
 def graphRelationHelper(graph_type,graph_func,good_objects,scene):
