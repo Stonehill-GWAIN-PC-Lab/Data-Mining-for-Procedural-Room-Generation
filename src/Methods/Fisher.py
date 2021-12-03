@@ -68,8 +68,8 @@ def arrangementModel(scenes_df, relationDf):
     o2y = []
     o2name = "chair"
     for scene in range(0,341,1):
-        m = df.index==str(scene)
-        smaller_df = df[m]
+        m = scenes_df.index==str(scene)
+        smaller_df = scenes_df[m]
         #print(smaller_df)
         #splitting the dataframe into list cause i'm tired and don't want to figure out how dataframes work at 2:30am
         vcx = list(smaller_df["vert centroid x"])
