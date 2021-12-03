@@ -82,15 +82,28 @@ def buildRelationshipDataFrame(df):
                 object2z = vcz[j]
                 object2r = dor[j]
                 if object1r != "null" and object2r != "null":
-                    print("Comparing distances of "+str(object1r)+" v "+str(object2r))
+                    #print("Comparing distances of "+str(object1r)+" v "+str(object2r))
                     distance = np.sqrt( (float(object1x)-float(object2x))**2 + (float(object1y)-float(object2y))**2 + (float(object1z)-float(object2z))**2 ) #d=sqrt((x1-x2)^2 + (y1-y2)^2 + (z1-z2)^2)
                     the_distances.append(distance)
-                    print(distance)
+                    #print(distance)
 
+    mean = meanCalc(the_distances)
+    print(mean)
+    std = stdCalc(mean, the_distances)
+    print(std)
     #splitting up the scenes
     #for i in range(0,341,1):
         #mask = 
         #smaller_df = 
+
+def stdCalc(mean, li):
+    num = 0
+    for value in li:
+        num = (mean-value)**2
+    return np.sqrt(num/len(li))
+
+def meanCalc(li):
+    return sum(li)/len(li)
 
 #created because I didn't want to change the old cold and break something else
 def newPropRelationshipFinder(distance):
