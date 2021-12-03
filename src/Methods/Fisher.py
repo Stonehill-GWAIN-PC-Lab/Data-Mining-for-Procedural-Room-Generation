@@ -60,9 +60,12 @@ def buildRelationshipDataFrame(df):
     print("in buildRelationshipDataFrame")
     #create the three lists
     print("printing real_label_dict")
-    print(real_label_dict)
+    #print(real_label_dict)
     vdf = createVersusDataFrame(real_label_dict)
-    print(vdf)
+    #print(vdf)
+    left = vdf["relation"]
+    name_relation = list(left)
+    print(name_relation)
     avg_prob = [0] * len(vdf)
     total_appearance = [0] * len(vdf)
     #cols support verts       vert centroid x     vert centroid y       vert centroid z     dict obj ref edge 0 edge 1 edge cost
