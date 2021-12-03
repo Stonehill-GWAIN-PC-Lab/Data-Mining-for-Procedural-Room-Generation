@@ -389,19 +389,19 @@ def return_data_frame(label_dict):
     #print(df)
     return df
 
-def runOccurenceModel():
-    #read mining.csv, create train and test dataset
-    #create occurence model and train on train data
-    #test against test data
-    print('TODO')
-
-def occurenceModel(scenes):
+def occurenceModel(scene, df, relationDf):
     '''Function takes an input scene and returns a probability for the static support hierarchy of the objects in the scene.
     The Occurence Model (Fisher et al. Section 6) describes what objects can be in synthesized scenes'''
     # use a Bayesian network B(S) to model the distribution over the set of objects that occur in a scene. 
-    print('TODO')
+    createBayesianNet(df, relationDf)
     # given a fixed set of objects we use a simple parent probability table to define a function T (S) that gives the probability of the parent-child connections between objects in a scene.
     print('TODO')
+
+def createBayesianNet(df, relationDf):
+    #Create a Bayesian net, add each of our objects to the network
+        #read through our object dict and add nodes for each obj
+    for i in real_label_dict:
+        print(i)
     
 def arrangementModel(object, scene):
     '''Function takes an object o positioned within a scene S and returns an unnormalized probability of its current placement and orientation.
