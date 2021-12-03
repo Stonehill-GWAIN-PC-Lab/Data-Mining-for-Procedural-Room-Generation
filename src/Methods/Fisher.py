@@ -230,30 +230,30 @@ def minSpanningGraph(objects,c_func,value_array = None):
             if c is not None:
                 E.append(((i,j),c)) #This has our cost function
     E=sorted(E,key = lambda a:a[1])
-    print("E:")
-    print(E)
+    #print("E:")
+    #print(E)
     T = SceneGraph(V) #Edges for minimum spanning tree
     T.edgeCosts=[] #reset edges
-    print('pre function:')
-    print(T.vertices)
-    print(T.edges)
-    print(T.edgeCosts)
+    #print('pre function:')
+    #print(T.vertices)
+    #print(T.edges)
+    #print(T.edgeCosts)
     while len(E) > 0:
         edge = E.pop(0)
-        print("Edge:")
-        print(edge[0])
-        print(edge[1])
+        #print("Edge:")
+        #print(edge[0])
+        #print(edge[1])
         if testInsert(edge[0],T):
             T.addEdge(edge[0],edge[1]) #Add edge and the edges cost
-    print("printing all edges and their cost in our graph")
-    print("edges:",T.edges)
-    print("edgecosts:",T.edgeCosts)
-    print("vertices")
-    for i in T.vertices:
-        print("entry")
-        print(i.centroid[0])
-        print(i.centroid[1])
-        print(i.centroid[2])
+    #print("printing all edges and their cost in our graph")
+    #print("edges:",T.edges)
+    #print("edgecosts:",T.edgeCosts)
+    #print("vertices")
+    #for i in T.vertices:
+        #print("entry")
+        #print(i.centroid[0])
+        #print(i.centroid[1])
+        #print(i.centroid[2])
     return T #What we have here is an ijv sparse rep
 
 def graphRelationHelper(graph_type,graph_func,good_objects,scene):
@@ -284,14 +284,14 @@ def writeTestFile(graphs):
     with open('input.txt','w') as fi: #We keep it as input.txt, although we can always make that part of a configuration file
         for i in range(len(graphs)):
             fi.write("t # "+str(i)+"\n")#Says what graph we are
-            print('graph is:')
-            print(graphs[i])
-            print(graphs[i][0])
-            print(graphs[i][1])
-            print(graphs[i][2])
-            print(graphs[i][3])
-            print(graphs[i][4])
-            print(graphs[i][5])
+            #print('graph is:')
+            #print(graphs[i])
+            #print(graphs[i][0])
+            #print(graphs[i][1])
+            #print(graphs[i][2])
+            #print(graphs[i][3])
+            #print(graphs[i][4])
+            #print(graphs[i][5])
             verts = graphs[i][0]
             edges = graphs[i][1]
             edgeCosts = graphs[i][2]
@@ -371,22 +371,22 @@ def return_data_frame(label_dict):
                         report_df["dict obj ref"].append("null")
                     else:
                         pass #We skip the x
-            print('made it through all lines')
-        print("printing df")
-        print(len(report_df["support"]))
-        print(len(report_df["verts"]))
-        print(len(report_df["dict obj ref"]))
-        print(len(report_df["edge 0"]))
-        print(len(report_df["edge 1"]))
-        print(len(report_df["edge cost"]))
-        print(len(report_df["index"]))
+            #print('made it through all lines')
+        #print("printing df")
+        #print(len(report_df["support"]))
+        #print(len(report_df["verts"]))
+        #print(len(report_df["dict obj ref"]))
+        #print(len(report_df["edge 0"]))
+        #print(len(report_df["edge 1"]))
+        #print(len(report_df["edge cost"]))
+        #print(len(report_df["index"]))
 
         df = pd.DataFrame(report_df)
     except:
         print("Exception")
         return None
     df.set_index('index',inplace = True)
-    print(df)
+    #print(df)
     return df
 
 def runOccurenceModel():
@@ -415,17 +415,17 @@ def twoObjectRelationshipProbability(obj1,obj2, value_array = None):
     distance = np.sqrt(np.sum((obj1.centroid-obj2.centroid)**2)) #d=sqrt((x1-x2)^2 + (y1-y2)^2 + (z1-z2)^2)
     global all_distances
     all_distances.append(distance)
-    print("distance stuff")
-    print(len(all_distances))
-    print(np.average(all_distances))
-    print("distance:",distance)
+    #print("distance stuff")
+    #print(len(all_distances))
+    #print(np.average(all_distances))
+    #print("distance:",distance)
     #print(distance)
     z_score = (distance-mean)/std
     #print(z_score)
-    print("zscore:",z_score)
+    #print("zscore:",z_score)
     probability = round(st.norm.cdf(z_score), 5)
     #print(probability)
-    print("prob:",probability)
+    #print("prob:",probability)
     if(probability>.5):
         return 1- ( (probability-.5) /.5)
     if(probability<.5):
@@ -467,7 +467,7 @@ def sunRGBDDataMiningFisher(starting_location = None,data_cleanup = None, write_
             data = frames[frame]
             fi.write(frame+','+str(len(data))+'\n')
             if(frame=="kitchen"): #We are only learning on kitchens
-                print('kitchen example')
+                #print('kitchen example')
                 FisherRelationships(frame,data,fi,[],True)
                 del data #Clean up our messes
     print("Finished running file")
