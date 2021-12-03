@@ -57,6 +57,12 @@ def FisherRelationships(frame,data,fi,prox_list,debug = False):
     print("Total number of distances found:"+str(len(all_distances)))
     print(all_distances)
 
+def getDistanceMetrics():
+    global all_distances
+    print(len(all_distances))
+    print(all_distances)
+    print(np.average(all_distances))
+
 def subprocessGraphRelations(scenes,percent_threshold,graph_func,graph_type):
     '''Modified function from Kermani.py that does not use Gbolt dependency'''
     min_gap = math.ceil(len(scenes) * percent_threshold) #If we dont' have our single object at the minimum threshold, we won't have any larger support
@@ -386,4 +392,5 @@ if __name__ == "__main__":
     removed_rooms = ["Dining_Room_Garage_Gym","Dining_Room_Kitchen_Office_Garage","Room","Living_Room_Dining_Room_Kitchen_Garage"]
     support = (20,1000)
     sunRGBDDataMiningFisher()
+    getDistanceMetrics()
     #runOccurenceModel()
