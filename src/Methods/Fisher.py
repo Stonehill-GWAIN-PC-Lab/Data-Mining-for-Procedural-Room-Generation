@@ -109,17 +109,17 @@ def buildRelationshipDataFrame(df):
     for i in range(0,len(name_relation),1):
         if total_appearance[i] != 0:
             avg_prob[i] = total_prob[i]/total_appearance[i]
-
-    print(name_relation)
-    print(avg_prob)
-    print(total_prob)
-    print(total_appearance)
     #create new relationdf
-    #newCreateVersusDataFrame(name_relation,avg_prob,total_prob,total_appearance)
+    final_relation_dataframe = newCreateVersusDataFrame(name_relation,avg_prob,total_prob,total_appearance)
+    print(final_relation_dataframe)
     #mean = meanCalc(the_distances)
     #print("Mean:",mean)
     #std = stdCalc(mean, the_distances)
     #print("std:",std)
+
+def newCreateVersusDataFrame(nr,ap,tp,ta):
+    relation_dataframe = pd.DataFrame(list(zip(nr, ap, tp, ta)),columns=["relation","neighborhood_avg","total_neighborhood","total_appearance"])
+    return relation_dataframe
 
 def stdCalc(mean, li):
     num = 0
