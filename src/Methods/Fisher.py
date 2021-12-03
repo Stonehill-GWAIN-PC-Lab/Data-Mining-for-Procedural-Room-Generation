@@ -67,12 +67,26 @@ def buildRelationshipDataFrame(df):
     vcz = smaller_df["vert centroid z"]
     dor = smaller_df["dict obj ref"]
     #only doing these cause I believe its all I need
-    print(vcx)
-    print(vcy)
-    print(vcz)
-    print(dor)
-    #for i in range(0,len(m),1):
-        #print(vcx[i],vcy[i],vcz[i],dor[i])
+    #initializing variables
+    object1x = 0
+    object2x = 0
+    object1y = 0
+    object2y = 0
+    object1z = 0
+    object2z = 0
+    object1r = ""
+    object2r = ""
+    for i in range(0,len(m),1):
+        object2x = vcx[i]
+        object2y = vcy[i]
+        object2z = vcz[i]
+        object2r = dor[i]
+        if object1r != "null" and object2r != "null":
+            print("Comparing distances of"+str(object1r)+str(object2r))
+        object1x = object2x
+        object1y = object2y
+        object1z = object2z
+        object1r = object2r
 
     #splitting up the scenes
     #for i in range(0,341,1):
