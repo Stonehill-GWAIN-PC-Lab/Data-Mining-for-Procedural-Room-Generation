@@ -68,6 +68,8 @@ def buildRelationshipDataFrame(df):
     dor = list(smaller_df["dict obj ref"])
     #only doing these cause I believe its all I need
     #initializing variables
+    the_distances = []
+
     for i in range(0,len(m)-1,1):
         object1x = vcx[i]
         object1y = vcy[i]
@@ -75,6 +77,7 @@ def buildRelationshipDataFrame(df):
         object1r = dor[i]
         if object1r != "null" and i<len(m)-1:
             for j in range(i+1,len(m)-1,1):
+                print(j)
                 object2x = vcx[j]
                 object2y = vcy[j]
                 object2z = vcz[j]
