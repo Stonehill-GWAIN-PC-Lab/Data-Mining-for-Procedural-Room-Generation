@@ -23,6 +23,8 @@ NUM_THREADS = 8
 #Assumes current dir = /project/ct-shml/SUNRGBD/Data-Mining-for-Procedural-Room-Generation
 path_to_data = "../../../../projectnb/ct-shml/"
 real_label_dict = {}
+global all_distances
+all_distances = []
 
 class SceneGraph:
     '''SceneGraph is used to store the vertices and edges that we build the furniture graphs from (for graph mining)'''
