@@ -71,7 +71,7 @@ def buildRelationshipDataFrame(df):
     b = False
     name = "temp"
     for index, row in df.iterrows():
-        print(row["Name"])
+        print(row.Name)
 
 def subprocessGraphRelations(scenes,percent_threshold,graph_func,graph_type):
     '''Modified function from Kermani.py that does not use Gbolt dependency'''
