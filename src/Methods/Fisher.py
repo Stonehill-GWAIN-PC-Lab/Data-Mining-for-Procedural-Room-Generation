@@ -170,7 +170,7 @@ def graphRelationHelper(graph_type,graph_func,good_objects,scene):
     graph = graph_type(objs,graph_func)
     if len(graph.vertices) == 0 or len(graph.edges) == 0:
         return None
-    res = ([(i,graph.vertices[i].label) for i in range(len(graph.vertices))],[(e[0],e[1],1) for e in graph.edges],[ec for ec in graph.edgeCosts])
+    res = ([(i,graph.vertices[i].label) for i in range(len(graph.vertices))],[(e[0],e[1],1) for e in graph.edges],[ec for ec in graph.edgeCosts], [(i,graph.vertices[i].centroid[0]) for i in range(len(graph.vertices))], [(i,graph.vertices[i].centroid[1]) for i in range(len(graph.vertices))], [(i,graph.vertices[i].centroid[2]) for i in range(len(graph.vertices))])
     del graph
     return res
 
@@ -197,6 +197,9 @@ def writeTestFile(graphs):
             print(graphs[i][0])
             print(graphs[i][1])
             print(graphs[i][2])
+            print(graphs[i][3])
+            print(graphs[i][4])
+            print(graphs[i][5])
             verts = graphs[i][0]
             edges = graphs[i][1]
             edgeCosts = graphs[i][2]
