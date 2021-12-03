@@ -481,8 +481,8 @@ def occurenceModel(scene, df, relationDf):
     BayesianNet = createBayesianNet(df, relationDf)
     # given a fixed set of objects we use a simple parent probability table to define a function T (S) that gives the probability of the parent-child connections between objects in a scene.
     print("Priting Bayesian Net")
-    for node in BayesianNet:
-        print(node)
+    for key, value in BayesianNet.items():
+        print(key, ' : ', value)
 
 def createBayesianNet(df, relationDf):
     #Create a Bayesian net, add each of our objects to the network
