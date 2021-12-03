@@ -97,7 +97,7 @@ def buildRelationshipDataFrame(df):
                         distance = np.sqrt( (float(object1x)-float(object2x))**2 + (float(object1y)-float(object2y))**2 + (float(object1z)-float(object2z))**2 ) #d=sqrt((x1-x2)^2 + (y1-y2)^2 + (z1-z2)^2)
                         the_distances.append(distance)
                         prob = newPropRelationshipFinder(distance)
-                        print("Comparing distances of "+str(object1r)+" v "+str(object2r)+" ----Distance:"+str(distance)+" ------Prob:"+prob)
+                        print("Comparing distances of "+str(object1r)+" v "+str(object2r)+" ----Distance:"+str(distance)+" ------Prob:"+str(prob))
                         row = findRow(vdf,object1r, object2r)
                         #modify table
                         total_appearance[row] = total_appearance[row]+1
