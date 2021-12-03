@@ -68,7 +68,14 @@ def buildRelationshipDataFrame(df):
     #row_mask7 = df["edge 1"]=="null"
     #row_mask8 = df["edge cost"]=="null"
     #print(df[row_mask1][row_mask2][row_mask3])#[row_mask4][row_mask5][row_mask6][row_mask7][row_mask8])
-    print(df.index==0)
+    m = df.index==0
+    for x in m:
+        if x == True:
+            print(x)
+    #splitting up the scenes
+    #for i in range(0,341,1):
+        #mask = 
+        #smaller_df = 
 
 def subprocessGraphRelations(scenes,percent_threshold,graph_func,graph_type):
     '''Modified function from Kermani.py that does not use Gbolt dependency'''
