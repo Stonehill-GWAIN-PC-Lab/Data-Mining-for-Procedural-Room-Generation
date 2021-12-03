@@ -72,6 +72,7 @@ def buildRelationshipDataFrame(df):
     for x in m:
         if x == True:
             print(x)
+    print(df.index)
     #splitting up the scenes
     #for i in range(0,341,1):
         #mask = 
