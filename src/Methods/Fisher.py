@@ -7,6 +7,7 @@ import numpy as np
 import pandas as pd
 import math
 import scipy.stats as st
+import matplotlib.pyplot as plt
 
 import time
 from collections import Counter,defaultdict
@@ -103,10 +104,8 @@ def arrangementModel(scenes_df, relationDf):
                             o1x.append(object2x)
                             o1y.append(object2y)
 
-    print(o1x)
-    print(o1y)
-    print(o2x)
-    print(o2y)
+    plt.scatter(o1x, o1y,c='blue')
+    plt.scatter(o2x,o2y,c='red')
     #most
 
 def buildRelationshipDataFrame(df):
