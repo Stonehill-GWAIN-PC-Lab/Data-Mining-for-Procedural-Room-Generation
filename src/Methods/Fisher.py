@@ -58,39 +58,40 @@ def FisherRelationships(frame,data,fi,prox_list,debug = False):
 def buildRelationshipDataFrame(df):
     print("in buildRelationshipDataFrame")
     #cols support verts       vert centroid x     vert centroid y       vert centroid z     dict obj ref edge 0 edge 1 edge cost
-    m = df.index==str(0)
-    smaller_df = df[m]
-    print(smaller_df)
-    #splitting the dataframe into list cause i'm tired and don't want to figure out how dataframes work at 2:30am
-    vcx = list(smaller_df["vert centroid x"])
-    vcy = list(smaller_df["vert centroid y"])
-    vcz = list(smaller_df["vert centroid z"])
-    dor = list(smaller_df["dict obj ref"])
-    #only doing these cause I believe its all I need
-    #initializing variables
-    the_distances = []
-    print(len(smaller_df))
-    for i in range(0,len(smaller_df)-1,1):
-        object1x = vcx[i]
-        object1y = vcy[i]
-        object1z = vcz[i]
-        object1r = dor[i]
-        if object1r != "null":
-            for j in range(i+1,len(smaller_df),1):
-                object2x = vcx[j]
-                object2y = vcy[j]
-                object2z = vcz[j]
-                object2r = dor[j]
-                if object1r != "null" and object2r != "null":
-                    #print("Comparing distances of "+str(object1r)+" v "+str(object2r))
-                    distance = np.sqrt( (float(object1x)-float(object2x))**2 + (float(object1y)-float(object2y))**2 + (float(object1z)-float(object2z))**2 ) #d=sqrt((x1-x2)^2 + (y1-y2)^2 + (z1-z2)^2)
-                    the_distances.append(distance)
-                    #print(distance)
+    for scene in range(0,341,1):
+        m = df.index==str(scene)
+        smaller_df = df[m]
+        print(smaller_df)
+        #splitting the dataframe into list cause i'm tired and don't want to figure out how dataframes work at 2:30am
+        vcx = list(smaller_df["vert centroid x"])
+        vcy = list(smaller_df["vert centroid y"])
+        vcz = list(smaller_df["vert centroid z"])
+        dor = list(smaller_df["dict obj ref"])
+        #only doing these cause I believe its all I need
+        #initializing variables
+        the_distances = []
+        print(len(smaller_df))
+        for i in range(0,len(smaller_df)-1,1):
+            object1x = vcx[i]
+            object1y = vcy[i]
+            object1z = vcz[i]
+            object1r = dor[i]
+            if object1r != "null":
+                for j in range(i+1,len(smaller_df),1):
+                    object2x = vcx[j]
+                    object2y = vcy[j]
+                    object2z = vcz[j]
+                    object2r = dor[j]
+                    if object1r != "null" and object2r != "null":
+                        #print("Comparing distances of "+str(object1r)+" v "+str(object2r))
+                        distance = np.sqrt( (float(object1x)-float(object2x))**2 + (float(object1y)-float(object2y))**2 + (float(object1z)-float(object2z))**2 ) #d=sqrt((x1-x2)^2 + (y1-y2)^2 + (z1-z2)^2)
+                        the_distances.append(distance)
+                        #print(distance)
 
     mean = meanCalc(the_distances)
-    print(mean)
+    print("Mean:",mean)
     std = stdCalc(mean, the_distances)
-    print(std)
+    print("std:",std)
     #splitting up the scenes
     #for i in range(0,341,1):
         #mask = 
@@ -110,20 +111,11 @@ def newPropRelationshipFinder(distance):
     #basically finding the zscore of the relationship
     std=15.0
     mean=90.0
-    distance = np.sqrt(np.sum((obj1.centroid-obj2.centroid)**2)) #d=sqrt((x1-x2)^2 + (y1-y2)^2 + (z1-z2)^2)
-    global all_distances
-    all_distances.append(distance)
-    print("distance stuff")
-    print(len(all_distances))
-    print(np.average(all_distances))
-    print("distance:",distance)
     #print(distance)
     z_score = (distance-mean)/std
     #print(z_score)
-    print("zscore:",z_score)
     probability = round(st.norm.cdf(z_score), 5)
     #print(probability)
-    print("prob:",probability)
     if(probability>.5):
         return 1- ( (probability-.5) /.5)
     if(probability<.5):
