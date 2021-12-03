@@ -22,7 +22,6 @@ NUM_THREADS = 8
 
 #Assumes current dir = /project/ct-shml/SUNRGBD/Data-Mining-for-Procedural-Room-Generation
 path_to_data = "../../../../projectnb/ct-shml/"
-global real_label_dict 
 global all_distances
 all_distances = []
 
@@ -145,6 +144,7 @@ def subprocessGraphRelations(scenes,percent_threshold,graph_func,graph_type):
     label_dict = writeTestFile(parsed_graphs)#Writes out the file to read
     df = return_data_frame(label_dict) #Reads back in the file as a pandas dataframe
     print(df)
+    global real_label_dict
     real_label_dict = label_dict
     createVersusDataFrame(label_dict)
     if df is None or 'verts' not in df.columns.values:
