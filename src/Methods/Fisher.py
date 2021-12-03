@@ -66,9 +66,8 @@ def buildRelationshipDataFrame(df):
     left = vdf["relation"]
     name_relation = list(left)
     #print(name_relation)
-    avg_prob = [0] * len(vdf)
-    print(avg_prob)
-    total_appearance = [0] * len(vdf)
+    total_prob = [0] * len(name_relation)
+    total_appearance = [0] * len(name_relation)
     #cols support verts       vert centroid x     vert centroid y       vert centroid z     dict obj ref edge 0 edge 1 edge cost
     for scene in range(0,341,1):
         m = df.index==str(scene)
@@ -100,8 +99,20 @@ def buildRelationshipDataFrame(df):
                         the_distances.append(distance)
                         prob = newPropRelationshipFinder(distance)
                         row = findRow(vdf,object1r, object2r)
+                        #modify table
+                        total_appearance[row] = total_appearance[row]+1
+                        total_prob[row] = total_prob[row]
                         #print(distance)
 
+    #then like actually make the avg
+    avg_prob = [0] * len(name_relation)
+    for i in range(0,len(name_relation),1):
+        avg_prob[i] = total_prob[i]/total_appearance[i]
+
+    print(name_relation)
+    print(avg_prob)
+    print(total_prob)
+    print(total_appearance)
     #mean = meanCalc(the_distances)
     #print("Mean:",mean)
     #std = stdCalc(mean, the_distances)
