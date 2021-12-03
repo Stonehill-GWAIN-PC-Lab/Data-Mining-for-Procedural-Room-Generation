@@ -69,7 +69,7 @@ def buildRelationshipDataFrame(df):
     #only doing these cause I believe its all I need
     #initializing variables
     the_distances = []
-
+    print(len(m))
     for i in range(0,len(m)-1,1):
         object1x = vcx[i]
         object1y = vcy[i]
