@@ -207,7 +207,10 @@ def writeTestFile(graphs):
             vertsCentroidY = graphs[i][4]
             vertsCentroidZ = graphs[i][5]
             for vert in verts:
-                fi.write("v "+str(vert[0])+" "+str(label_dict[vert[1]])+str(vertsCentroidX[1])+str(vertsCentroidY[1])+str(vertsCentroidZ[1])+"\n")
+                vertX=vertsCentroidX[vert]
+                vertY=vertsCentroidY[vert]
+                vertZ=vertsCentroidZ[vert]
+                fi.write("v "+str(vert[0])+" "+str(label_dict[vert[1]])+str(vertX[1])+str(vertY[1])+str(vertZ[1])+"\n")
             for e in range(len(edges)):
                 edge = edges[e]
                 edgeCost = edgeCosts[e]
