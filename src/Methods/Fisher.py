@@ -22,7 +22,7 @@ NUM_THREADS = 8
 
 #Assumes current dir = /project/ct-shml/SUNRGBD/Data-Mining-for-Procedural-Room-Generation
 path_to_data = "../../../../projectnb/ct-shml/"
-all_distances = []
+real_label_dict = {}
 
 class SceneGraph:
     '''SceneGraph is used to store the vertices and edges that we build the furniture graphs from (for graph mining)'''
@@ -57,11 +57,16 @@ def FisherRelationships(frame,data,fi,prox_list,debug = False):
 
 def buildRelationshipDataFrame(df):
     print("in buildRelationshipDataFrame")
+    #create the three lists
+    print(real_label_dict)
+    #createVersusDataFrame(label_dict)
+    #avg prob
+    #total_appearance = 
     #cols support verts       vert centroid x     vert centroid y       vert centroid z     dict obj ref edge 0 edge 1 edge cost
     for scene in range(0,341,1):
         m = df.index==str(scene)
         smaller_df = df[m]
-        print(smaller_df)
+        #print(smaller_df)
         #splitting the dataframe into list cause i'm tired and don't want to figure out how dataframes work at 2:30am
         vcx = list(smaller_df["vert centroid x"])
         vcy = list(smaller_df["vert centroid y"])
@@ -86,16 +91,14 @@ def buildRelationshipDataFrame(df):
                         #print("Comparing distances of "+str(object1r)+" v "+str(object2r))
                         distance = np.sqrt( (float(object1x)-float(object2x))**2 + (float(object1y)-float(object2y))**2 + (float(object1z)-float(object2z))**2 ) #d=sqrt((x1-x2)^2 + (y1-y2)^2 + (z1-z2)^2)
                         the_distances.append(distance)
+                        prob = newPropRelationshipFinder(distance)
+                        #row = findRow()
                         #print(distance)
 
-    mean = meanCalc(the_distances)
-    print("Mean:",mean)
-    std = stdCalc(mean, the_distances)
-    print("std:",std)
-    #splitting up the scenes
-    #for i in range(0,341,1):
-        #mask = 
-        #smaller_df = 
+    #mean = meanCalc(the_distances)
+    #print("Mean:",mean)
+    #std = stdCalc(mean, the_distances)
+    #print("std:",std)
 
 def stdCalc(mean, li):
     num = 0
@@ -109,8 +112,8 @@ def meanCalc(li):
 #created because I didn't want to change the old cold and break something else
 def newPropRelationshipFinder(distance):
     #basically finding the zscore of the relationship
-    std=15.0
-    mean=90.0
+    std=.2
+    mean=1.05
     #print(distance)
     z_score = (distance-mean)/std
     #print(z_score)
@@ -138,6 +141,7 @@ def subprocessGraphRelations(scenes,percent_threshold,graph_func,graph_type):
     label_dict = writeTestFile(parsed_graphs)#Writes out the file to read
     df = return_data_frame(label_dict) #Reads back in the file as a pandas dataframe
     print(df)
+    real_label_dict = label_dict
     createVersusDataFrame(label_dict)
     if df is None or 'verts' not in df.columns.values:
         return None
