@@ -58,19 +58,18 @@ def FisherRelationships(frame,data,fi,prox_list,debug = False):
 def buildRelationshipDataFrame(df):
     print("in buildRelationshipDataFrame")
     #cols support verts       vert centroid x     vert centroid y       vert centroid z     dict obj ref edge 0 edge 1 edge cost
-    #find the empty rows, the beginning of the next scene
-    #row_mask1 = df["support"]=="null" #and df["verts"]=="null" #and df["vert centroid x"]=="null" and df["vert centroid y"]=="null" and df["dict obj ref"]=="null" and df["edge 0"]=="null" and df["edge 1"]=="null" and df["edge cost"]=="null"
-    #row_mask2 = df["verts"]=="null"
-    #row_mask3 = df["vert centroid x"]=="null"
-    #row_mask4 = df["vert centroid y"]=="null"
-    #row_mask5 = df["dict obj ref"]=="null"
-    #row_mask6 = df["edge 0"]=="null"
-    #row_mask7 = df["edge 1"]=="null"
-    #row_mask8 = df["edge cost"]=="null"
-    #print(df[row_mask1][row_mask2][row_mask3])#[row_mask4][row_mask5][row_mask6][row_mask7][row_mask8])
     m = df.index==str(0)
     smaller_df = df[m]
     print(smaller_df)
+    #splitting the dataframe into list cause i'm tired and don't want to figure out how dataframes work at 2:30am
+    vcx = smaller_df["vert centroid x"]
+    vcy = smaller_df["vert centroid y"]
+    vcz = smaller_df["vert centroid z"]
+    dor = smaller_df["dict obj"]
+    #only doing these cause I believe its all I need
+    for i in range(0,len(m),1):
+        print(vcx[i],vcy[i],vcz[i],dor[i])
+
     #splitting up the scenes
     #for i in range(0,341,1):
         #mask = 
