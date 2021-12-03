@@ -53,6 +53,7 @@ def FisherRelationships(frame,data,fi,prox_list,debug = False):
     print(subprocessGraphRelations(data,0.05,twoObjectRelationshipProbability,minSpanningGraph))
     #trying to figure out the new mean and std based on values from all_distances
     global all_distances
+    all_distances.append(1)
     print("Total number of distances found:"+str(len(all_distances)))
     print(all_distances)
 
