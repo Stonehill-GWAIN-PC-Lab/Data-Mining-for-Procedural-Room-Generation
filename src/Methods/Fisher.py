@@ -60,6 +60,17 @@ def FisherRelationships(frame,data,fi,prox_list,debug = False):
     arrangementModel(local_df,relationDf)
 
 def arrangementModel(scenes_df, relationDf):
+    with open('out.txt','w') as fi:
+        fi.write(list(scenes_df["vert centroid x"]))
+        fi.write(list(scenes_df["vert centroid y"]))
+        fi.write(list(scenes_df["vert centroid z"]))
+        fi.write(list(scenes_df["dict obj ref"]))
+        fi.write("----------------------")
+        fi.write(list(relationDf["relation"]))
+        fi.write(list(relationDf["neighborhood_avg"]))
+        fi.write(list(relationDf["total_neighborhood"]))
+        fi.write(list(relationDf["total_appearance"]))
+
     #strongest
     print(relationDf.sort_values(by='neighborhood_avg', ascending=False))
     o1name = "bowl"
@@ -104,8 +115,8 @@ def arrangementModel(scenes_df, relationDf):
                             o1x.append(object2x)
                             o1y.append(object2y)
 
-    plt.scatter(o1x, o1y,c='blue')
-    plt.scatter(o2x,o2y,c='red')
+    #plt.scatter(o1x, o1y,c='blue')
+    #plt.scatter(o2x,o2y,c='red')
     #most
 
 def buildRelationshipDataFrame(df):
