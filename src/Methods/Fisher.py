@@ -158,6 +158,7 @@ def minSpanningGraph(objects,c_func,value_array = None):
     print("edgecosts:",T.edgeCosts)
     print("vertices")
     for i in T.vertices:
+        print("entry")
         print(i.centroid)
     return T #What we have here is an ijv sparse rep
 
