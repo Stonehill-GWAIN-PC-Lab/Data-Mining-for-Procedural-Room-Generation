@@ -68,19 +68,19 @@ def buildRelationshipDataFrame(df):
     dor = list(smaller_df["dict obj ref"])
     #only doing these cause I believe its all I need
     #initializing variables
-    for i in range(0,len(m),1):
+    for i in range(0,len(m)-1,1):
         object1x = vcx[i]
         object1y = vcy[i]
         object1z = vcz[i]
         object1r = dor[i]
         if object1r != "null":
-            for j in range(i+1,len(m),1):
+            for j in range(i+1,len(m)-1,1):
                 object2x = vcx[j]
                 object2y = vcy[j]
                 object2z = vcz[j]
                 object2r = dor[j]
                 if object1r != "null" and object2r != "null":
-                    print("Comparing distances of"+str(object1r)+" v "+str(object2r))
+                    print("Comparing distances of "+str(object1r)+" v "+str(object2r))
                     #distance = np.sqrt(np.sum((obj1.centroid-obj2.centroid)**2)) #d=sqrt((x1-x2)^2 + (y1-y2)^2 + (z1-z2)^2)
         
 
