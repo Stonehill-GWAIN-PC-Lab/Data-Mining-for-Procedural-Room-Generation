@@ -478,18 +478,24 @@ def occurenceModel(scene, df, relationDf):
     print("printing inputs")
     print(df)
     print(relationDf)
-    BayesianNet = createBayesianNet(df, relationDf)
+    BayesianNet = createBayesianNet(["bowl", "chair", "plate"], df, relationDf)
     # given a fixed set of objects we use a simple parent probability table to define a function T (S) that gives the probability of the parent-child connections between objects in a scene.
     print("Priting Bayesian Net")
     for key, value in BayesianNet.items():
         print(key, ' : ', value)
 
-def createBayesianNet(df, relationDf):
+def createBayesianNet(objs_list=[], df, relationDf):
     #Create a Bayesian net, add each of our objects to the network
         #read through our object dict and add nodes for each obj
     BayesianNet = {}
-    for i in real_label_dict:
-        BayesianNet[i] = []
+    
+    if(objs_list==[]): #Use all objects
+        for i in real_label_dict:
+            BayesianNet[i] = []
+    else: #User specified list
+        for i in objs_list:
+            BayesianNet[i] = []
+
     #fill in Bayesian Net edges and probabilities
     for index, row in relationDf.iterrows():
         if(row['neighborhood_avg']>0.0):#if there is a relationship (neighborhood_avg > 0)
