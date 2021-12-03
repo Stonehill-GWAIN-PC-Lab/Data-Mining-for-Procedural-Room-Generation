@@ -71,7 +71,7 @@ def buildRelationshipDataFrame(df):
     print(vcy)
     print(vcz)
     print(dor)
-    for i in range(0,len(m),1):
+    #for i in range(0,len(m),1):
         #print(vcx[i],vcy[i],vcz[i],dor[i])
 
     #splitting up the scenes
