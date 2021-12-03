@@ -67,8 +67,12 @@ def buildRelationshipDataFrame(df):
     vcz = smaller_df["vert centroid z"]
     dor = smaller_df["dict obj ref"]
     #only doing these cause I believe its all I need
+    print(vcx)
+    print(vcy)
+    print(vcz)
+    print(dor)
     for i in range(0,len(m),1):
-        print(vcx[i],vcy[i],vcz[i],dor[i])
+        #print(vcx[i],vcy[i],vcz[i],dor[i])
 
     #splitting up the scenes
     #for i in range(0,341,1):
