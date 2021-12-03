@@ -69,15 +69,14 @@ def buildRelationshipDataFrame(df):
     #only doing these cause I believe its all I need
     #initializing variables
     the_distances = []
-    print(len(m))
-    for i in range(0,len(m)-1,1):
+    print(len(smaller_df))
+    for i in range(0,len(smaller_df)-1,1):
         object1x = vcx[i]
         object1y = vcy[i]
         object1z = vcz[i]
         object1r = dor[i]
-        if object1r != "null" and i<len(m)-1:
-            for j in range(i+1,len(m)-1,1):
-                print(j)
+        if object1r != "null":
+            for j in range(i+1,len(smaller_df),1):
                 object2x = vcx[j]
                 object2y = vcy[j]
                 object2z = vcz[j]
