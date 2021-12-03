@@ -73,7 +73,7 @@ def buildRelationshipDataFrame(df):
         object1y = vcy[i]
         object1z = vcz[i]
         object1r = dor[i]
-        if object1r != "null":
+        if object1r != "null" and i<len(m)-1:
             for j in range(i+1,len(m)-1,1):
                 object2x = vcx[j]
                 object2y = vcy[j]
