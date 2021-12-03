@@ -80,7 +80,7 @@ def buildRelationshipDataFrame(df):
                 object2z = vcz[j]
                 object2r = dor[j]
                 if object1r != "null" and object2r != "null":
-                    print("Comparing distances of"+str(object1r)+str(object2r))
+                    print("Comparing distances of"+str(object1r)+" v "+str(object2r))
                     #distance = np.sqrt(np.sum((obj1.centroid-obj2.centroid)**2)) #d=sqrt((x1-x2)^2 + (y1-y2)^2 + (z1-z2)^2)
         
 
