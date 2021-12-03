@@ -60,6 +60,9 @@ def FisherRelationships(frame,data,fi,prox_list,debug = False):
     arrangementModel(local_df,relationDf)
 
 def arrangementModel(scenes_df, relationDf):
+    with open('index.txt','w') as fi:
+        for x in list(scenes_df.index):
+            fi.write(str(x)+",")
     with open('x.txt','w') as fi:
         for x in list(scenes_df["vert centroid x"]):
             fi.write(str(x)+",")
