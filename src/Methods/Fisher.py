@@ -83,8 +83,9 @@ def buildRelationshipDataFrame(df):
                 object2r = dor[j]
                 if object1r != "null" and object2r != "null":
                     print("Comparing distances of "+str(object1r)+" v "+str(object2r))
-                    #distance = np.sqrt(np.sum((obj1.centroid-obj2.centroid)**2)) #d=sqrt((x1-x2)^2 + (y1-y2)^2 + (z1-z2)^2)
-        
+                    distance = np.sqrt( (object1x-object2x)**2 + (object1y-object2y)**2 + (object1z-object2z)**2 ) #d=sqrt((x1-x2)^2 + (y1-y2)^2 + (z1-z2)^2)
+                    the_distances.append(distance)
+                    print(distance)
 
     #splitting up the scenes
     #for i in range(0,341,1):
