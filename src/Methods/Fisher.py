@@ -65,8 +65,9 @@ def buildRelationshipDataFrame(df):
     #print(vdf)
     left = vdf["relation"]
     name_relation = list(left)
-    print(name_relation)
+    #print(name_relation)
     avg_prob = [0] * len(vdf)
+    print(avg_prob)
     total_appearance = [0] * len(vdf)
     #cols support verts       vert centroid x     vert centroid y       vert centroid z     dict obj ref edge 0 edge 1 edge cost
     for scene in range(0,341,1):
@@ -98,7 +99,7 @@ def buildRelationshipDataFrame(df):
                         distance = np.sqrt( (float(object1x)-float(object2x))**2 + (float(object1y)-float(object2y))**2 + (float(object1z)-float(object2z))**2 ) #d=sqrt((x1-x2)^2 + (y1-y2)^2 + (z1-z2)^2)
                         the_distances.append(distance)
                         prob = newPropRelationshipFinder(distance)
-                        #row = findRow()
+                        row = findRow(vdf,object1r, object2r)
                         #print(distance)
 
     #mean = meanCalc(the_distances)
