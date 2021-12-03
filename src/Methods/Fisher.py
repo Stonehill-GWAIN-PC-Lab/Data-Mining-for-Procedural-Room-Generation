@@ -68,7 +68,8 @@ def buildRelationshipDataFrame(df):
     dor = smaller_df["dict obj ref"]
     #only doing these cause I believe its all I need
     #initializing variables
-    print(vcx)
+    temp = list(vcx)
+    print(temp)
     """for i in range(0,len(m),1):
         object1x = vcx[i]
         object1y = vcy[i]
