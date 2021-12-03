@@ -56,6 +56,10 @@ def FisherRelationships(frame,data,fi,prox_list,debug = False):
     #take that df and mess with the data
     relationDf = buildRelationshipDataFrame(local_df)
     occurenceModel("", local_df, relationDf)
+    arrangementModel(local_df,relationDf)
+
+def arrangementModel(scenes_df, relationDf):
+    print(relationDf.sort_values(by='neighborhood_avg', ascending=False))
 
 def buildRelationshipDataFrame(df):
     print("in buildRelationshipDataFrame")
@@ -407,11 +411,6 @@ def createBayesianNet(df, relationDf):
         #read through our object dict and add nodes for each obj
     for i in real_label_dict:
         print(i)
-    
-def arrangementModel(object, scene):
-    '''Function takes an object o positioned within a scene S and returns an unnormalized probability of its current placement and orientation.
-    The Arrangement Model (Fisher et al. Section 7) describes where scene objects can be placed.'''
-    print('TODO')
     
 def twoObjectRelationshipProbability(obj1,obj2, value_array = None):
     #basically finding the zscore of the relationship
