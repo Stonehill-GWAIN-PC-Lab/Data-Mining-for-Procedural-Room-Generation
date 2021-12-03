@@ -229,7 +229,6 @@ def return_data_frame(label_dict):
                     data = line.strip().split(" ")
                     print('data:',data)
                     if data[0] == "t":
-                        print('data is t')
                         report_df["index"].append(data[2])
                         i=data[2]
                         report_df["support"].append("null") #unused col
@@ -258,7 +257,7 @@ def return_data_frame(label_dict):
                         pass #We skip the x
             print('made it through all lines')
         print("printing df")
-        print(len(report_df["supports"]))
+        print(len(report_df["support"]))
         print(len(report_df["verts"]))
         print(len(report_df["dict obj ref"]))
         print(len(report_df["edge 0"]))
