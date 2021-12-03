@@ -54,7 +54,8 @@ def FisherRelationships(frame,data,fi,prox_list,debug = False):
     local_df = subprocessGraphRelations(data,0.05,twoObjectRelationshipProbability,minSpanningGraph)
     print(local_df)
     #take that df and mess with the data
-    buildRelationshipDataFrame(local_df)
+    relationDf = buildRelationshipDataFrame(local_df)
+    occurenceModel("", local_df, relationDf)
 
 def buildRelationshipDataFrame(df):
     print("in buildRelationshipDataFrame")
@@ -112,6 +113,7 @@ def buildRelationshipDataFrame(df):
     #create new relationdf
     final_relation_dataframe = newCreateVersusDataFrame(name_relation,avg_prob,total_prob,total_appearance)
     print(final_relation_dataframe)
+    return final_relation_dataframe
     #mean = meanCalc(the_distances)
     #print("Mean:",mean)
     #std = stdCalc(mean, the_distances)
@@ -393,6 +395,9 @@ def occurenceModel(scene, df, relationDf):
     '''Function takes an input scene and returns a probability for the static support hierarchy of the objects in the scene.
     The Occurence Model (Fisher et al. Section 6) describes what objects can be in synthesized scenes'''
     # use a Bayesian network B(S) to model the distribution over the set of objects that occur in a scene. 
+    print("printing inputs")
+    print(df)
+    print(relationDf)
     createBayesianNet(df, relationDf)
     # given a fixed set of objects we use a simple parent probability table to define a function T (S) that gives the probability of the parent-child connections between objects in a scene.
     print('TODO')
