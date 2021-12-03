@@ -255,6 +255,7 @@ def return_data_frame(label_dict):
                         report_df["dict obj ref"].append("null")
                     else:
                         pass #We skip the x
+            print('made it through all lines')
         print("printing df")
         print(len(report_df["supports"]))
         print(len(report_df["verts"]))
