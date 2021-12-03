@@ -53,7 +53,11 @@ def FisherRelationships(frame,data,fi,prox_list,debug = False):
     local_df = subprocessGraphRelations(data,0.05,twoObjectRelationshipProbability,minSpanningGraph)
     print(local_df)
     #take that df and mess with the data
-    print("mess with the df now")
+    buildRelationshipDataFrame(local_df)
+
+def buildRelationshipDataFrame(df):
+    row_mask = df["index"]==0
+    print(df[row_mask])
 
 def subprocessGraphRelations(scenes,percent_threshold,graph_func,graph_type):
     '''Modified function from Kermani.py that does not use Gbolt dependency'''
