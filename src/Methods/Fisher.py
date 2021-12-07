@@ -534,7 +534,8 @@ def createBayesianNet(objs_list, df, relationDf):
                 a,b = str.split(' v ', 1)
                 if(a==row["dict obj ref"]):
                     #BayesianNet[a].append([b,row['neighborhood_avg']])
-                    (BayesianNet[row["dict obj ref"]][0])[1].append[0,b]
+                    #print(BayesianNet[row["dict obj ref"]])
+                    (BayesianNet[row["dict obj ref"]][0])[1].append(b)
     return BayesianNet
     
 def twoObjectRelationshipProbability(obj1,obj2, value_array = None):
