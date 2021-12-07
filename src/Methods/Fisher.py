@@ -58,7 +58,7 @@ def FisherRelationships(frame,data,fi,prox_list,debug = False):
     relationDf = buildRelationshipDataFrame(local_df)
     #throw out bad data
     mask = relationDf['neighborhood_avg']>.3
-    tdf = relationDf[mask].sort_values(by=['neighborhood_avg'],ascending=false)
+    tdf = relationDf[mask].sort_values(by=['neighborhood_avg'],ascending=False)
     mask = tdf["total_appearances"] > 10
     valid_relation_df = tdf[mask]
     print("Valid relations:")
