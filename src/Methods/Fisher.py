@@ -339,11 +339,11 @@ def minSpanningGraph(objects,c_func,value_array = None):
     #print("edges:",T.edges)
     #print("edgecosts:",T.edgeCosts)
     #print("vertices")
-    #for i in T.vertices:
-        #print("entry")
-        #print(i.centroid[0])
-        #print(i.centroid[1])
-        #print(i.centroid[2])
+    for i in T.vertices:
+        print("size entry")
+        print(i.size[0])
+        print(i.size[1])
+        print(i.size[2])
     return T #What we have here is an ijv sparse rep
 
 def graphRelationHelper(graph_type,graph_func,good_objects,scene):
@@ -512,8 +512,8 @@ def createBayesianNet(objs_list, df, relationDf):
     
 def twoObjectRelationshipProbability(obj1,obj2, value_array = None):
     #basically finding the zscore of the relationship
-    std=15.0
-    mean=90.0
+    std=.2
+    mean=1.05
     distance = np.sqrt(np.sum((obj1.centroid-obj2.centroid)**2)) #d=sqrt((x1-x2)^2 + (y1-y2)^2 + (z1-z2)^2)
     global all_distances
     all_distances.append(distance)
