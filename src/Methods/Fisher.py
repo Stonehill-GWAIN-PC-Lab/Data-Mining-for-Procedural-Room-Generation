@@ -533,7 +533,7 @@ def createBayesianNet(objs_list, df, relationDf):
             a,b = str.split(' v ', 1)
             if(a==row["dict obj ref"]):
                 #BayesianNet[a].append([b,row['neighborhood_avg']])
-                print(BayesianNet[row["dict obj ref"]][1])
+                print(BayesianNet[row["dict obj ref"]])
                 BayesianNet[row["dict obj ref"]][1].append(b)
     return BayesianNet
     
