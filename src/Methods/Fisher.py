@@ -339,11 +339,11 @@ def minSpanningGraph(objects,c_func,value_array = None):
     #print("edges:",T.edges)
     #print("edgecosts:",T.edgeCosts)
     #print("vertices")
-    for i in T.vertices:
-        print("size entry")
-        print(i.size[0])
-        print(i.size[1])
-        print(i.size[2])
+    #for i in T.vertices:
+        #print("entry")
+        #print(i.centroid[0])
+        #print(i.centroid[1])
+        #print(i.centroid[2])
     return T #What we have here is an ijv sparse rep
 
 def graphRelationHelper(graph_type,graph_func,good_objects,scene):
@@ -352,7 +352,7 @@ def graphRelationHelper(graph_type,graph_func,good_objects,scene):
     graph = graph_type(objs,graph_func)
     if len(graph.vertices) == 0 or len(graph.edges) == 0:
         return None
-    res = ([(i,graph.vertices[i].label) for i in range(len(graph.vertices))],[(e[0],e[1],1) for e in graph.edges],[ec for ec in graph.edgeCosts], [(i,graph.vertices[i].centroid[0]) for i in range(len(graph.vertices))], [(i,graph.vertices[i].centroid[1]) for i in range(len(graph.vertices))], [(i,graph.vertices[i].centroid[2]) for i in range(len(graph.vertices))])
+    res = ([(i,graph.vertices[i].label) for i in range(len(graph.vertices))],[(e[0],e[1],1) for e in graph.edges],[ec for ec in graph.edgeCosts], [(i,graph.vertices[i].centroid[0]) for i in range(len(graph.vertices))], [(i,graph.vertices[i].centroid[1]) for i in range(len(graph.vertices))], [(i,graph.vertices[i].centroid[2]) for i in range(len(graph.vertices))], [(i,graph.vertices[i].size[0]) for i in range(len(graph.vertices))], [(i,graph.vertices[i].centroid[1]) for i in range(len(graph.vertices))], [(i,graph.vertices[i].centroid[2]) for i in range(len(graph.vertices))])
     del graph
     return res
 
@@ -388,13 +388,19 @@ def writeTestFile(graphs):
             vertsCentroidX = graphs[i][3]
             vertsCentroidY = graphs[i][4]
             vertsCentroidZ = graphs[i][5]
+            vertsSizeX = graphs[i][6]
+            vertsSizeY = graphs[i][7]
+            vertsSizeZ = graphs[i][8]
             #for vert in verts:
             for v in range(len(verts)):
                 vert = verts[v]
                 vertX=vertsCentroidX[v]
                 vertY=vertsCentroidY[v]
                 vertZ=vertsCentroidZ[v]
-                fi.write("v "+str(vert[0])+" "+str(label_dict[vert[1]])+" "+str(vertX[1])+" "+str(vertY[1])+" "+str(vertZ[1])+"\n")
+                vertSizeX=vertsSizeX[v]
+                vertSizeY=vertsSizeY[v]
+                vertSizeZ=vertsSizeZ[v]
+                fi.write("v "+str(vert[0])+" "+str(label_dict[vert[1]])+" "+str(vertX[1])+" "+str(vertY[1])+" "+str(vertZ[1])+" "+str(vertsSizeX)+" "+str(vertsSizeY)+" "+str(vertsSizeZ)+"\n")
             for e in range(len(edges)):
                 edge = edges[e]
                 edgeCost = edgeCosts[e]
