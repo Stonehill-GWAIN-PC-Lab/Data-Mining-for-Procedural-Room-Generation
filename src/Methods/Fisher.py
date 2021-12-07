@@ -524,7 +524,7 @@ def createBayesianNet(objs_list, df, relationDf):
         mask = tdf["dict obj ref"]==row["dict obj ref"]
         numAppearances = len(tdf[mask])
         prob = numAppearances/341
-        BayesianNet[row["dict obj ref"]].append([prob,[]])
+        BayesianNet[row["dict obj ref"]].append(prob,[])
         #fill in edges
         for index2, row2 in relationDf.iterrows():
             #grab each item in relation
@@ -533,7 +533,7 @@ def createBayesianNet(objs_list, df, relationDf):
             a,b = str.split(' v ', 1)
             if(a==row["dict obj ref"]):
                 #BayesianNet[a].append([b,row['neighborhood_avg']])
-                print(BayesianNet[row["dict obj ref"]])
+                #print(BayesianNet[row["dict obj ref"]])
                 BayesianNet[row["dict obj ref"]][1].append(b)
     return BayesianNet
     
