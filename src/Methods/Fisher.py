@@ -56,6 +56,14 @@ def FisherRelationships(frame,data,fi,prox_list,debug = False):
     print(local_df)
     #take that df and mess with the data
     relationDf = buildRelationshipDataFrame(local_df)
+    #throw out bad data
+    mask = relationDf['neighborhood_avg']>.3
+    tdf = relationDf[mask].sort_values(by=['neighborhood_avg'],ascending=false)
+    mask = tdf["total_appearances"] > 10
+    valid_relation_df = tdf[mask]
+    print("Valid relations:")
+    print(valid_relation_df)
+    
     occurenceModel("", local_df, relationDf)
     arrangementModel(local_df,relationDf)
 
