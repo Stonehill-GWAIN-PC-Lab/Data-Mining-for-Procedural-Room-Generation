@@ -341,7 +341,7 @@ def minSpanningGraph(objects,c_func,value_array = None):
     #print("vertices")
     for i in T.vertices:
         print("size entry")
-        print(i.size[0])
+        print(i.size)
     return T #What we have here is an ijv sparse rep
 
 def graphRelationHelper(graph_type,graph_func,good_objects,scene):
@@ -350,7 +350,7 @@ def graphRelationHelper(graph_type,graph_func,good_objects,scene):
     graph = graph_type(objs,graph_func)
     if len(graph.vertices) == 0 or len(graph.edges) == 0:
         return None
-    res = ([(i,graph.vertices[i].label) for i in range(len(graph.vertices))],[(e[0],e[1],1) for e in graph.edges],[ec for ec in graph.edgeCosts], [(i,graph.vertices[i].centroid[0]) for i in range(len(graph.vertices))], [(i,graph.vertices[i].centroid[1]) for i in range(len(graph.vertices))], [(i,graph.vertices[i].centroid[2]) for i in range(len(graph.vertices))], [(i,graph.vertices[i].size[0]) for i in range(len(graph.vertices))], [(i,graph.vertices[i].centroid[1]) for i in range(len(graph.vertices))], [(i,graph.vertices[i].centroid[2]) for i in range(len(graph.vertices))])
+    res = ([(i,graph.vertices[i].label) for i in range(len(graph.vertices))],[(e[0],e[1],1) for e in graph.edges],[ec for ec in graph.edgeCosts], [(i,graph.vertices[i].centroid[0]) for i in range(len(graph.vertices))], [(i,graph.vertices[i].centroid[1]) for i in range(len(graph.vertices))], [(i,graph.vertices[i].centroid[2]) for i in range(len(graph.vertices))], [(i,graph.vertices[i].size[0]) for i in range(len(graph.vertices))], [(i,graph.vertices[i].size[1]) for i in range(len(graph.vertices))], [(i,graph.vertices[i].size[2]) for i in range(len(graph.vertices))])
     del graph
     return res
 
