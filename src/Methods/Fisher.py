@@ -519,7 +519,7 @@ def createBayesianNet(objs_list, df, relationDf):
 
     #for each row starting with greatest size in DF and while it isnt 0 or null
     for index, row in tdf.iterrows():
-        if not BayesianNet.has_key(row["dict obj ref"]): 
+        if not row["dict obj ref"] in BayesianNet: 
             BayesianNet[row["dict obj ref"]] = [] #Create a node in the dict if there isnt one yet
             #fill in prob of node
             mask = tdf["dict obj ref"]==row["dict obj ref"]
