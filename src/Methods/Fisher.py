@@ -59,7 +59,7 @@ def FisherRelationships(frame,data,fi,prox_list,debug = False):
     #throw out bad data
     mask = relationDf['neighborhood_avg']>.3
     tdf = relationDf[mask].sort_values(by=['neighborhood_avg'],ascending=False)
-    mask = tdf["total_appearances"] > 10
+    mask = tdf["total_appearance"] > 10
     valid_relation_df = tdf[mask]
     print("Valid relations:")
     print(valid_relation_df)
@@ -492,7 +492,7 @@ def occurenceModel(scene, df, relationDf):
     BayesianNet = createBayesianNet(real_label_dict, df, relationDf)
     #BayesianNet = createBayesianNet(["bowl", "chair", "plate"], df, relationDf)
     # given a fixed set of objects we use a simple parent probability table to define a function T (S) that gives the probability of the parent-child connections between objects in a scene.
-    print("Priting Bayesian Net")
+    print("Printing Bayesian Net")
     for key, value in BayesianNet.items():
         print(key, ' : ', value)
 
@@ -503,7 +503,10 @@ def createBayesianNet(objs_list, df, relationDf):
     
     for i in objs_list:
         BayesianNet[i] = []
-
+    
+    #sort local_df by size so we are getting the correct parent supports
+    df.sort_values(by=['vert size'],ascending=False)
+    print(df)
     #fill in Bayesian Net edges and probabilities
     for index, row in relationDf.iterrows():
         if(row['neighborhood_avg']>0.0):#if there is a relationship (neighborhood_avg > 0)
