@@ -511,18 +511,17 @@ def createBayesianNet(objs_list, df, relationDf):
     #fill in Bayesian Net edges and probabilities
 
     #for each row starting with greatest size in DF and while it isnt 0 or null
-    for index, row in df.iterrows():
-        if(row["vert size"]!="null"):
-            BayesianNet[row["dict obj ref"]] = [] #Assign node
-            #fill in edges
-            for index2, row2 in relationDf.iterrows():
-                    #grab each item in relation
-                    str = row['relation']
-                    #if item is our row in df
-                    a,b = str.split(' v ', 1)
-                    if(a==row["dict obj ref"]):
-                        print('not done')
-                        #BayesianNet[a].append([b,row['neighborhood_avg']])
+    for index, row in tdf.iterrows():
+        BayesianNet[row["dict obj ref"]] = [] #Assign node
+        #fill in edges
+        for index2, row2 in relationDf.iterrows():
+            #grab each item in relation
+            str = row2['relation']
+            #if item is our row in df
+            a,b = str.split(' v ', 1)
+            if(a==row["dict obj ref"]):
+                print('not done')
+                #BayesianNet[a].append([b,row['neighborhood_avg']])
     return BayesianNet
 
 
