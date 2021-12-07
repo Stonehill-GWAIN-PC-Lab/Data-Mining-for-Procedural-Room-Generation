@@ -519,22 +519,23 @@ def createBayesianNet(objs_list, df, relationDf):
 
     #for each row starting with greatest size in DF and while it isnt 0 or null
     for index, row in tdf.iterrows():
-        BayesianNet[row["dict obj ref"]] = [] #Assign node
-        #fill in prob of node
-        mask = tdf["dict obj ref"]==row["dict obj ref"]
-        numAppearances = len(tdf[mask])
-        prob = numAppearances/341
-        BayesianNet[row["dict obj ref"]].append([prob,[]])
-        #fill in edges
-        for index2, row2 in relationDf.iterrows():
-            #grab each item in relation
-            str = row2['relation']
-            #if item is our row in df
-            a,b = str.split(' v ', 1)
-            if(a==row["dict obj ref"]):
-                #BayesianNet[a].append([b,row['neighborhood_avg']])
-                #print(BayesianNet[row["dict obj ref"]])
-                (BayesianNet[row["dict obj ref"]][0])[1].append(b)
+        if not BayesianNet.has_key(row["dict obj ref"]): 
+            BayesianNet[row["dict obj ref"]] = [] #Create a node in the dict if there isnt one yet
+            #fill in prob of node
+            mask = tdf["dict obj ref"]==row["dict obj ref"]
+            numAppearances = len(tdf[mask])
+            prob = numAppearances/341
+            BayesianNet[row["dict obj ref"]].append([prob,[]])
+            #fill in edges
+            for index2, row2 in relationDf.iterrows():
+                #grab each item in relation
+                str = row2['relation']
+                #if item is our row in df
+                a,b = str.split(' v ', 1)
+                if(a==row["dict obj ref"]):
+                    #BayesianNet[a].append([b,row['neighborhood_avg']])
+                    #print(BayesianNet[row["dict obj ref"]])
+                    (BayesianNet[row["dict obj ref"]][0])[1].append(b)
     return BayesianNet
     
 def twoObjectRelationshipProbability(obj1,obj2, value_array = None):
