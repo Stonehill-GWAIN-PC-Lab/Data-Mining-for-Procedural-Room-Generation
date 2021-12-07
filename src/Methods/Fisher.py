@@ -64,7 +64,7 @@ def FisherRelationships(frame,data,fi,prox_list,debug = False):
     print("Valid relations:")
     print(valid_relation_df)
     
-    occurenceModel("", local_df, relationDf)
+    occurenceModel("", local_df, valid_relation_df)
     arrangementModel(local_df,relationDf)
 
 def arrangementModel(scenes_df, relationDf):
@@ -501,12 +501,29 @@ def createBayesianNet(objs_list, df, relationDf):
         #read through our object dict and add nodes for each obj
     BayesianNet = {}
     
-    for i in objs_list:
-        BayesianNet[i] = []
+    #for i in objs_list:
+    #    BayesianNet[i] = []
 
     #sort local_df by size so we are getting the correct parent supports
     print(df.sort_values(by='vert size', ascending=False))
     #fill in Bayesian Net edges and probabilities
+
+    #for each row starting with greatest size in DF and while it isnt 0 or null
+    for index, row in df.iterrows():
+        if(row["vert size"]!="null"):
+            BayesianNet[row["dict obj ref"]] = [] #Assign node
+            #fill in edges
+            for index2, row2 in relationDf.iterrows():
+                    #grab each item in relation
+                    str = row['relation']
+                    #if item is our row in df
+                    a,b = str.split(' v ', 1)
+                    if(a==row["dict obj ref"]):
+                        print('not done')
+                        #BayesianNet[a].append([b,row['neighborhood_avg']])
+    return BayesianNet
+
+
     for index, row in relationDf.iterrows():
         if(row['neighborhood_avg']>0.0):#if there is a relationship (neighborhood_avg > 0)
             #grab each item in relation
