@@ -523,7 +523,7 @@ def createBayesianNet(objs_list, df, relationDf):
         #fill in prob of node
         numAppearances = len(tdf["dict obj ref"]==row)
         prob = numAppearances/341
-        BayesianNet[row["dict obj ref"]].append([prob]["prob table"]])
+        BayesianNet[row["dict obj ref"]].append([prob,["prob table"]])
         #fill in edges
         # for index2, row2 in relationDf.iterrows():
         #     #grab each item in relation
