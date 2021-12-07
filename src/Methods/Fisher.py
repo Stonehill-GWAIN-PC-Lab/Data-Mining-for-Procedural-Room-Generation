@@ -409,7 +409,7 @@ def return_data_frame(label_dict):
     print(r_label_dict)
     #paths = [f for f in os.listdir(".") if os.path.isfile(f) and "out.txt" in f]
     report_df = {}
-    keys = ["support","verts","vert centroid x","vert centroid y","vert centroid z","dict obj ref","edge 0","edge 1", "edge cost", "index"]#,"num_vert"
+    keys = ["support","verts","vert centroid x","vert centroid y","vert centroid z","vert size","dict obj ref","edge 0","edge 1", "edge cost", "index"]#,"num_vert"
     for key in keys:
         report_df[key]  = []
     i='0'
@@ -433,6 +433,7 @@ def return_data_frame(label_dict):
                         report_df["vert centroid x"].append("null")
                         report_df["vert centroid y"].append("null")
                         report_df["vert centroid z"].append("null")
+                        report_df["vert size"].append("null")
                         report_df["dict obj ref"].append("null")
                         report_df["edge 0"].append("null")
                         report_df["edge 1"].append("null")
@@ -443,6 +444,7 @@ def return_data_frame(label_dict):
                         report_df["vert centroid x"].append(data[3])
                         report_df["vert centroid y"].append(data[4])
                         report_df["vert centroid z"].append(data[5])
+                        report_df["vert size"].append(data[6])
                         report_df["edge 0"].append("null")
                         report_df["edge 1"].append("null")    
                         report_df["edge cost"].append("null")      
@@ -458,6 +460,7 @@ def return_data_frame(label_dict):
                         report_df["vert centroid x"].append("null")
                         report_df["vert centroid y"].append("null")
                         report_df["vert centroid z"].append("null")
+                        report_df["vert size"].append("null")
                         report_df["dict obj ref"].append("null")
                     else:
                         pass #We skip the x
