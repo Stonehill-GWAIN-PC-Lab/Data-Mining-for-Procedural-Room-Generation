@@ -541,15 +541,8 @@ def createBayesianNet(objs_list, df, relationDf):
                     #itereate over all scenes, find examples where we have a and b with same scene number
                     sceneNum=0
                     numRel=0
-                    for i in range(341):
-                        sceneNum=i
-                        indexmask=df["index"]==sceneNum
-                        tempdff=df[mask]
-                        foundA=False
-                        for index, row in tempdff:
-                            if(row["dict obj ref"]==a):
-                                foundA=True
-                        if(foundA):
+                    for index3, row in df:
+                        if(row["dict obj ref"]==a):
                             totalA+=1
                     print("num of A",totalA)
                     print("num of rel",totalRel)
