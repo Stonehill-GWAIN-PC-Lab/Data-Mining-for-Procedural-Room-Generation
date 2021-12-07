@@ -339,11 +339,9 @@ def minSpanningGraph(objects,c_func,value_array = None):
     #print("edges:",T.edges)
     #print("edgecosts:",T.edgeCosts)
     #print("vertices")
-    #for i in T.vertices:
-        #print("entry")
-        #print(i.centroid[0])
-        #print(i.centroid[1])
-        #print(i.centroid[2])
+    for i in T.vertices:
+        print("size entry")
+        print(i.size[0])
     return T #What we have here is an ijv sparse rep
 
 def graphRelationHelper(graph_type,graph_func,good_objects,scene):
@@ -400,7 +398,7 @@ def writeTestFile(graphs):
                 vertSizeX=vertsSizeX[v]
                 vertSizeY=vertsSizeY[v]
                 vertSizeZ=vertsSizeZ[v]
-                fi.write("v "+str(vert[0])+" "+str(label_dict[vert[1]])+" "+str(vertX[1])+" "+str(vertY[1])+" "+str(vertZ[1])+" "+str(vertsSizeX)+" "+str(vertsSizeY)+" "+str(vertsSizeZ)+"\n")
+                fi.write("v "+str(vert[0])+" "+str(label_dict[vert[1]])+" "+str(vertX[1])+" "+str(vertY[1])+" "+str(vertZ[1])+" "+str(vertsSizeX[1])+" "+str(vertsSizeY[1])+" "+str(vertsSizeZ[1])+"\n")
             for e in range(len(edges)):
                 edge = edges[e]
                 edgeCost = edgeCosts[e]
@@ -569,7 +567,7 @@ def sunRGBDDataMiningFisher(starting_location = None,data_cleanup = None, write_
     from functools import reduce
     total_frames = reduce(lambda x,y: x+y,[len(frames[frame]) for frame in keys])
     print ("Finished sorting the file paths:",total_frames)
-    with open(r'/project/ct-shml/Jimmy-SUNRGBD/outputs/mining.csv',write_type) as fi:
+    with open(r'/project/ct-shml/SUNRGBD/outputs/mining.csv',write_type) as fi:
         #TODO: Make every connection discovered by subgraph pattern mining
         for frame in keys:
             data = frames[frame]
