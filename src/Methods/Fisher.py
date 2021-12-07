@@ -534,18 +534,6 @@ def createBayesianNet(objs_list, df, relationDf):
                 a,b = str.split(' v ', 1)
                 if(a==row["dict obj ref"]):
                     #BayesianNet[a].append([b,row['neighborhood_avg']])
-                    #print(BayesianNet[row["dict obj ref"]])
-                    #figure out number of scenes that have both a AND b, then divide this by all scenes with a
-                    totalRel=numAppearances
-                    totalA=0
-                    #itereate over all scenes, find examples where we have a and b with same scene number
-                    sceneNum=0
-                    numRel=0
-                    for index3, row in df.iterrows():
-                        if(row["dict obj ref"]==a):
-                            totalA+=1
-                    print("num of A",totalA)
-                    print("num of rel",totalRel)
                     (BayesianNet[row["dict obj ref"]][0])[1].append[0,b]
     return BayesianNet
     
