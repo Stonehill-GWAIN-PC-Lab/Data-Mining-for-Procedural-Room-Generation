@@ -505,7 +505,9 @@ def createBayesianNet(objs_list, df, relationDf):
     #    BayesianNet[i] = []
 
     #sort local_df by size so we are getting the correct parent supports
-    print(df.sort_values(by='vert size', ascending=False))
+    mask = df['vert size']!="null"
+    tdf = df[mask].sort_values(by=['vert size'],ascending=False)
+    print(tdf)
     #fill in Bayesian Net edges and probabilities
 
     #for each row starting with greatest size in DF and while it isnt 0 or null
